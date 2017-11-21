@@ -1,0 +1,151 @@
+<html>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+
+	<body>
+		<div id='iCont'>
+			<div class='cTitle'>
+				<img src='logo.png' width='70%'>
+			</div>
+			<div class='cFormLogin'>
+				<form method='post'>
+						<center><input type="text" placeholder="Username" name="user" id="txtUser">
+						<br>
+						<input type="password" placeholder="Password" name="pass" id="txtPass">
+						<br>
+						<div class='cRekomenRegis'> Don't have an account? <a href='register.html'> Sign Up </a> here! </div>
+						<input type="button" onclick="pindah()" class='cBtnLogin' name="btnLogin" value="Login">
+
+						<input type="button" onclick="myfunc()" class='cBtnGoogle' name="btnGoogle" value="Google+">
+						<input type="button" onclick="myfuncfb()" class='cBtnFacebook' name="btnFacebook" value="Facebook"></center>
+				</form>
+			</div>
+            <div id="cobaAjax">
+
+            </div>
+		</div>
+
+	</body>
+  <script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function alertDismissed() {
+    // do something
+    }
+    window.onload = function() {
+      var getInput = document.getElementById('txtUser');
+      localStorage.setItem("storageName",getInput);
+    };
+
+    function onDeviceReady(){
+        window.plugins.googleplus.disconnect(
+          function (msg) {
+            alert("Berhasil Logout Google"); // do something useful instead of alerting
+          },function (msg) {
+            alert("Gagal Logout Google"); // do something useful instead of alerting
+          }
+        );
+        facebookConnectPlugin.logout(function (msg) {
+          alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+        }, function (msg) {
+          alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        });
+    }
+
+    function onBackKeyDown() {
+      var x = confirm("Are you sure ?");
+      window.plugins.googleplus.disconnect(
+        function (msg) {
+          alert("Berhasil Logout Google"); // do something useful instead of alerting
+        },function (msg) {
+          alert("Gagal Logout Google"); // do something useful instead of alerting
+          x=false;
+          alert(msg);
+
+        }
+      );
+      facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
+        alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+      }, function (msg) {
+        alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        x=false;
+        alert(msg);
+      });
+      facebookConnectPlugin.logout(function (msg) {
+        alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+      }, function (msg) {
+        alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        x=false;
+        alert(msg);
+      });
+
+      if(x){
+        if (navigator.app) {
+            navigator.app.exitApp();
+        } else if (navigator.device) {
+            navigator.device.exitApp();
+        } else {
+            window.close();
+        }
+      }
+    }
+  function myfunc(){
+    window.plugins.googleplus.login({},function (obj) {
+      alert(JSON.stringify(obj)); // do something useful instead of alerting
+    },
+    function (msg) {
+      alert('error: ' + msg);
+    });
+  };
+  function myfuncfb(){
+    var fbLoginSuccess = function(result){
+    //calling api after login success
+    facebookConnectPlugin.api("/me?fields=email,name,birthday",['email','user_birthday','public_profile'],function(userData){
+    //API success callback
+      alert("User Info : "+userData.email+"\n Hello ! Our Beloved : "+userData.name +"\n We Want to Remind You that your Birthday is : "+userData.birthday);
+      },function(error){
+    //API error callback
+      alert(JSON.stringify(error));
+      });
+    }
+    //alert("user Info : "+userData.name+" Hello "+userData.email);
+    //document.getElementById("cobaAjax").innerHTML=JSON.stringify(userData);
+    //alert("UserInfo: "+userData['email'] + "\n Hello "+userData['name']+" Good to see you");
+    //};
+    facebookConnectPlugin.login(['email','user_birthday','public_profile'], fbLoginSuccess,
+    function loginError (error) {
+    alert(JSON.stringify(error));
+  });
+  };
+  function pindah(){
+
+    var getInput = document.getElementById('txtUser').value;
+    localStorage.setItem("storageName",getInput);
+    window.location = "next.html";
+      navigator.notification.alert(
+          'You Are Login!',  // message
+          alertDismissed,         // callback
+          'Notif Login',            // title
+          'Done'                  // buttonName
+      );
+  }
+  app.initialize();
+
+  </script>
+</html>
