@@ -1,0 +1,218 @@
+<html>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+  <!--<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+  <script type="text/javascript" src="cordova.js"></script>
+  <!--<script type="text/javascript" src="js/index.js"></script>-->
+  <script src="node_modules/onsenui/js/onsenui.min.js"></script>
+	<meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js"></script>
+    <link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.min.css">
+
+	</head>
+
+	<body>
+
+    <ons-splitter>
+      <ons-splitter-side id="menu" side="left" width="220px" swipe-target-width="125px" collapse swipeable >
+        <ons-page>
+          <ons-list id="chatMember">
+            <ons-list-header><img src='logo.png' width='70%'>Menu</ons-list-header>
+            <ons-list-item class="mentionBtn" tappable>Home</ons-list-item>
+            <ons-list-item class="mentionBtn" tappable>About</ons-list-item>
+            <ons-list-item class="mentionBtn" tappable>Profile</ons-list-item>
+            <ons-list-item class="mentionBtn" tappable>Support</ons-list-item>
+            <ons-list-item style="position:absolute;overflow:hidden;bottom:0;" class="mentionBtn" onclick="onBackKeyDown()" tappable>Logout</ons-list-footer>
+          </ons-list>
+        </ons-page>
+      </ons-splitter-side>
+      <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+    </ons-splitter>
+    <template id="home.html">
+    <ons-page id="page1">
+        <ons-toolbar style="background-color:white;">
+        <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu" style="color:black;"></ons-icon>
+            </ons-toolbar-button>
+        </div>
+
+        <div class="center" style="color:black;">
+          Go & Rent
+        </div>
+        </ons-toolbar>
+
+		<div class="center">
+    		<div class='cTitle'>
+				<div class='cFormDalam'>
+					<h1><input type="text" id="timo" placeholder="Search"/></h1>
+				</div>
+      		</div>
+        </div>
+		
+		<footer>
+			<div class="" style="float:left;width:20%;">
+				<img src="img/explore.png" alt="" style="width:100%;height:100%;">
+			</div>
+			<div class="" style="float:left;width:20%;">
+				<img src="img/favorite.png" alt="" style="width:100%;height:100%;"><br>
+			</div>
+			<div class="" style="float:left;width:20%;">
+				<img src="img/history_active.png" alt="" style="width:100%;height:100%;"><br>
+			</div>
+			<div class="" style="float:left;width:20%;">
+				<img src="img/inbox.png" alt="" style="width:100%;height:100%;"><br>
+			</div>
+			<div class="" style="float:left;width:20%;">
+				<img src="img/profile.png" alt="" style="width:100%;height:100%;"><br>
+			</div>
+		</footer>
+  </ons-page>
+  </template>
+	</body>
+  <script type="text/javascript">
+  var server = "http://workastation.hol.es/sdpajax/server.php";
+  function getIp() {
+      ons.notification.prompt({message: 'Masukkan ip server'}).then(function(answer) {
+          if(answer.trim() == '')
+              getIp();
+          else {
+              server += answer;
+              server += '/sdpajax/server.php';
+          }
+      });
+  }
+    document.addEventListener("deviceready", onDeviceReady, false);
+    ons.ready(function() {
+          /*getIp();
+          $.post(server, {'user': 'timo', 'tipe': 2},function(data){
+            cordova.plugins.notification.local.schedule({
+                id: 10,
+                title: "Berhasil Login",
+                text: "Halo "+data['nama']+"!"
+            });
+          });
+
+          // makeNotification(0, 'ini title', 'ini isi dari text');
+          /*cordova.plugins.notification.local.on("click", function(notification) {
+              cordova.plugins.notification.local.clearAll();
+          });*/
+
+
+          // navigator.vibrate([300, 10, 150, 10, 150]);
+      });
+      $(document).ready(onDeviceReady());
+    function onDeviceReady(){
+      //getIp();
+      $.post(server, {'user': localStorage.getItem("storageName"), 'tipe': 3},function(data){
+        data = JSON.parse(data);
+        cordova.plugins.notification.local.schedule({
+            id: 5,
+            title: "Berhasil Login",
+            text: "Halo "+data['name']+"!"
+        });
+      });
+
+    };
+  function myfunc(){
+    window.plugins.googleplus.login({},function (obj) {
+      alert(JSON.stringify(obj)); // do something useful instead of alerting
+    },
+    function (msg) {
+      alert('error: ' + msg);
+    });
+  };
+  function myfuncfb(){
+    var fbLoginSuccess = function(result){
+    //calling api after login success
+    facebookConnectPlugin.api("/me?fields=email,name,birthday",['email','user_birthday','public_profile'],function(userData){
+    //API success callback
+      alert("User Info : "+userData.email+"\n Hello ! Our Beloved : "+userData.name +"\n We Want to Remind You that your Birthday is : "+userData.birthday);
+      },function(error){
+    //API error callback
+      alert(JSON.stringify(error));
+      });
+    }
+    //alert("user Info : "+userData.name+" Hello "+userData.email);
+    //document.getElementById("cobaAjax").innerHTML=JSON.stringify(userData);
+    //alert("UserInfo: "+userData['email'] + "\n Hello "+userData['name']+" Good to see you");
+    //};
+    facebookConnectPlugin.login(['email','user_birthday','public_profile'], fbLoginSuccess,
+    function loginError (error) {
+    alert(JSON.stringify(error));
+  });
+  };
+  function onBackKeyDown(){
+    makeNotification();
+    $.post(server, {'chat': chat, 'nama': nama, 'tipe': 2});
+
+    var x = confirm("Are you sure ?");
+    window.plugins.googleplus.disconnect(
+      function (msg) {
+        alert("Berhasil Logout Google"); // do something useful instead of alerting
+      },function (msg) {
+        alert("Gagal Logout Google"); // do something useful instead of alerting
+        x=false;
+        alert(msg);
+
+      }
+    );
+    facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
+      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+    }, function (msg) {
+      alert("Gagal Logout Facebook"); // do something useful instead of alerting
+      x=false;
+      alert(msg);
+    });
+    facebookConnectPlugin.logout(function (msg) {
+      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+    }, function (msg) {
+      alert("Gagal Logout Facebook"); // do something useful instead of alerting
+      x=false;
+      alert(msg);
+    });
+
+    if(x){
+      if (navigator.app) {
+          navigator.app.exitApp();
+      } else if (navigator.device) {
+          navigator.device.exitApp();
+      } else {
+          window.close();
+      }
+    }
+  }
+  window.fn = {};
+    window.fn.open = function() {
+        let menu = document.getElementById('menu');
+        menu.open();
+    };
+
+    window.fn.close = function() {
+        let menu = document.getElementById('menu');
+        menu.close();
+    };
+    function makeNotification() {
+        cordova.plugins.notification.local.schedule({
+            id: 1,
+            title: "Coba Coba",
+            text: "Hai Hai Timo"
+        });
+    };
+
+  app.initialize();
+
+  </script>
+</html>
