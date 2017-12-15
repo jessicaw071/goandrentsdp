@@ -131,7 +131,22 @@ body{
 	outline: none;
 
 }
- .cFormLogin input[type="text"], .cFormLogin input[type="password"] {
+
+.contProfile input[type="text"], .contProfile input[type="password"]{
+	font-family: HNLight;
+	font-size: 1em;
+	width: 90%;
+	height: 30px;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: solid 1px #dcdcdc;
+	border-radius: 3px;
+	transition: box-shadow 0.3s, border 0.3s;
+	position:relative;
+	left:0px;
+}
+
+.cFormLogin input[type="text"], .cFormLogin input[type="password"] {
 	font-family: HNLight;
 	font-size: 1em;
 	width: 18em;

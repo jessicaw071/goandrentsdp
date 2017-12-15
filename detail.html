@@ -54,9 +54,9 @@
         <ons-page>
           <ons-list id="chatMember">
             <ons-list-header><img src='logo.png' width='70%'>Menu</ons-list-header>
-            <ons-list-item class="mentionBtn" tappable>Home</ons-list-item>
+            <ons-list-item class="mentionBtn" tappable><a href="next.html">Home</a></ons-list-item>
             <ons-list-item class="mentionBtn" tappable>About</ons-list-item>
-            <ons-list-item class="mentionBtn" tappable>Profile</ons-list-item>
+            <ons-list-item class="mentionBtn" tappable><a href="profile.html">Profile</a></ons-list-item>
             <ons-list-item class="mentionBtn" tappable>Support</ons-list-item>
             <ons-list-item style="position:absolute;overflow:hidden;bottom:0;" class="mentionBtn" onclick="onBackKeyDown()" tappable>Logout</ons-list-footer>
           </ons-list>
@@ -117,8 +117,8 @@
 		<img class="heartFav" src="img/heart.png" style="width:10%;height:5%;position:absolute;top:10px;right:10px;">
 		<h1 style="margin-left:10px;font-family:AgencyFB">Comfy Family Home</h1>
 		<p style="margin-left:10px;font-size:1em;">Private Home</p>
-		<p style="margin-left:10px;color:gray">Hosted by <a href="#" style="color:#f94d6e">Timo</a></p>
-		<div class="profileHost" style="width:20%;height:12%;position:absolute;top:45%;right:30px;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;"></div>
+		<p style="margin-left:10px;color:gray">Hosted by <a href="#" style="color:#f94d6e">Kenji</a></p>
+		<div class="profileHost" style="width:75px;height:75px;position:absolute;top:45%;right:30px;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;"></div>
 		<hr>
 		<center><div class="facility" style="width:95%%;height:12%;margin-left:10px;clear:both;margin-top:20px;font-size:0.8em">
 			<div class="fasil" style="width:20%;height:100%;float:left">
@@ -144,10 +144,12 @@
 			<p class="isiDetail" style="font-size:1em;font-weight:none;">Comfy little home for family holiday. Another facilities are kitchen, air conditioner in every room, refrigerator, and pantry.</p>			
 		</div>
 		
-		<footer>
-			<div class="price" style="text-align:left;margin-top:10px;margin-left:10px;font-size:1.5em;font-weight:bold;float:left">Rp. 250.000,00</div><div style="float:left;text-align:left;font-size:1em;margin-top:15px;margin-left:5px;">per night</div>
+		<footer>			
+			<div class="price" style="text-align:left;margin-top:10px;margin-left:10px;font-size:1.5em;font-weight:bold;float:left">Rp. 10.250.000,00</div><div style="float:left;text-align:left;font-size:1em;margin-top:15px;margin-left:5px;">per night</div>
 			<div class="captReview" style="font-size:1em;margin-left:10px;clear:both;position:absolute;bottom:10px;">Rates 4 of 5</div>
-			<input type="button" name="btnBooking" value="Check Availability" style="height:60%;background-color:#f94d6e;border-radius:10px;font-size:1em;color:white;top:20%;position:relative;">
+			<form class="buatDetail" method='post' style="text-align:right;padding-right:10px;">
+				<input type="button" name="btnBooking" value="Check Availability" style="height:60%;background-color:#f94d6e;border-radius:10px;font-size:1em;color:white;margin-top:10px;">
+			</form>
 		</footer>
   </ons-page>
   </template>

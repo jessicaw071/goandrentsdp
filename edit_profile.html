@@ -13,14 +13,38 @@
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-    <script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js"></script>
-    <link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css">
-    <link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.min.css">
-
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js"></script>
+		
+		<link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css">
+		<link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.min.css">
+		
+		<script>
+			$(function() {
+				$("#banner > div:gt(0)").hide();
+				setInterval(function() {
+				  $('#banner > div:first')
+					.fadeOut(1000)
+					.next()
+					.fadeIn(1000)
+					.end()
+					.appendTo('#banner');
+				},  3000);
+			});
+		</script>
+		
+		<style>
+		  .carousel-inner > .item > img,
+		  .carousel-inner > .item > a > img{
+			  width: 100%;
+			  margin: auto;
+		  }
+	  </style>	
 	</head>
 
 	<body>
@@ -30,9 +54,9 @@
         <ons-page>
           <ons-list id="chatMember">
             <ons-list-header><img src='logo.png' width='70%'>Menu</ons-list-header>
-            <ons-list-item class="mentionBtn" tappable>Home</ons-list-item>
+            <ons-list-item class="mentionBtn" tappable><a href="next.html">Home</a></ons-list-item>
             <ons-list-item class="mentionBtn" tappable>About</ons-list-item>
-            <ons-list-item class="mentionBtn" tappable>Profile</ons-list-item>
+            <ons-list-item class="mentionBtn" tappable><a href="profile.html">Profile</a></ons-list-item>
             <ons-list-item class="mentionBtn" tappable>Support</ons-list-item>
             <ons-list-item style="position:absolute;overflow:hidden;bottom:0;" class="mentionBtn" onclick="onBackKeyDown()" tappable>Logout</ons-list-footer>
           </ons-list>
@@ -54,69 +78,23 @@
         </div>
         </ons-toolbar>
 		
-		<div class="center">
-    		<div class='cTitle'>
-				<div class='cFormDalam'>
-					<h1><input type="text" id="timo" placeholder="Search"/></h1>
-				</div>
-      		</div>
-        </div>
-        
-		<div style="width:100%;height:calc(100% - 50px);">
-			<div class="horizontal-menu-fav" style="display:absolute;">
-				<div class="detailFavorite" style="display:inline-block;">
-					<div class="img-feature"><center><img src='img/src1.png' style="width:100%;height:100%;"></center></div>
-					<div class="content">
-						<h5><b>Kebab Kings, Dhar...</b></h5>
-						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
-					</div>
-				</div>	
-			</div>
-			<div class="horizontal-menu-fav" style="display:absolute;">
-				<div class="detailFavorite" style="display:inline-block;">
-					<div class="img-feature"><center><img src='img/src1.png' style="width:100%;height:100%;"></center></div>
-					<div class="content">
-						<h5><b>Kebab Kings, Dhar...</b></h5>
-						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
-					</div>
-				</div>	
-			</div>
-			<div class="horizontal-menu-fav" style="display:absolute;">
-				<div class="detailFavorite" style="display:inline-block;">
-					<div class="img-feature"><center><img src='img/src1.png' style="width:100%;height:100%;"></center></div>
-					<div class="content">
-						<h5><b>Kebab Kings, Dhar...</b></h5>
-						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
-					</div>
-				</div>	
-			</div>
-			<div class="horizontal-menu-fav" style="display:absolute;">
-				<div class="detailFavorite" style="display:inline-block;">
-					<div class="img-feature"><center><img src='img/src1.png' style="width:100%;height:100%;"></center></div>
-					<div class="content">
-						<h5><b>Kebab Kings, Dhar...</b></h5>
-						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
-					</div>
-				</div>	
-			</div>
+		<div class="contProfile" style="width:100%;height:auto;">
+			<div class="fotoProfile" style="width:100px;height:100px;position:relative;margin:auto;margin-top:20px;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;margin-bottom:10px;"></div>
+			<p align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;"><a href="#">Change Photo</a><p>
+			<p align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;">Member since August 2017</p>
+			<form method='post' class="editProf" align="left">
+				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Full name</p>
+				<input type="text" name="txtName" value="Kenji Andrean">
+				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Email</p>
+				<input type="text" name="txtEmail" value="kenjiandrean@gmail.com">
+				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Password</p>
+				<input type="password" name="txtPassword" value="1234asdf">
 		</div>
-
-       <footer>
-			<div class="" style="float:left;width:20%;">
-        <a href="next.html"><img src="img/explore.png" alt="" style="width:100%;height:100%;"></a>
-			</div>
-			<div class="" style="float:left;width:20%;">
-				<a href="favorite.html"><img src="img/favorite.png" alt="" style="width:100%;height:100%;"><br></a>
-			</div>
-			<div class="" style="float:left;width:20%;">
-				<a href="#"><img src="img/history_active.png" alt="" style="width:100%;height:100%;"><br></a>
-			</div>
-			<div class="" style="float:left;width:20%;">
-				<a href="#"><img src="img/inbox.png" alt="" style="width:100%;height:100%;"><br></a>
-			</div>
-			<div class="" style="float:left;width:20%;">
-				<a href="profile.html"><img src="img/profile.png" alt="" style="width:100%;height:100%;"><br></a>
-			</div>
+		
+		<footer style="text-align:right;padding-right:20px;">
+				<input type="button" name="btnBooking" value="Save" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
+				<input type="button" name="btnCancel" value="Cancel" style="width:30%;height:60%;background-color:white;border-radius:10px;font-size:1.5em;color:#f94d6e;top:20%;position:relative;">
+			</form>
 		</footer>
   </ons-page>
   </template>
