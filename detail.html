@@ -14,16 +14,16 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>		
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js"></script>
-		
+
 		<link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css">
 		<link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.min.css">
-		
+
 		<script>
 			$(function() {
 				$("#banner > div:gt(0)").hide();
@@ -37,14 +37,14 @@
 				},  3000);
 			});
 		</script>
-		
+
 		<style>
 		  .carousel-inner > .item > img,
 		  .carousel-inner > .item > a > img{
 			  width: 100%;
 			  margin: auto;
 		  }
-	  </style>	
+	  </style>
 	</head>
 
 	<body>
@@ -77,7 +77,7 @@
           Go & Rent
         </div>
         </ons-toolbar>
-		
+
 		<div class="detailContent">
 				<div id="myCarousel" class="carousel slide" style="width:100%;height:40%" data-ride="carousel">
 				    <!-- Indicators -->
@@ -101,7 +101,7 @@
 							<img src="img/home2.jpg"  style="width:100%;height:100%">
 							</div>
 						</div>
-			
+
 						<!-- Left and right controls -->
 						<a class="left carousel-control" href="#myCarousel" data-slide="prev">
 							<span class="glyphicon glyphicon-chevron-left"></span>
@@ -113,7 +113,10 @@
 						</a>
 					</div>
 			</div>
-			
+      <button id="buyNowBtn"> Buy Now !</button>
+         <button id="buyInFutureBtn"> Pay in Future !</button>
+         <button id="profileSharingBtn"> Profile Sharing !</button>
+         <button id="cardScanBtn">Advanced: Use card.io scan only</button>
 		<img class="heartFav" src="img/heart.png" style="width:10%;height:5%;position:absolute;top:10px;right:10px;">
 		<h1 style="margin-left:10px;font-family:AgencyFB">Comfy Family Home</h1>
 		<p style="margin-left:10px;font-size:1em;">Private Home</p>
@@ -141,10 +144,10 @@
 		<hr>
 		<div class="aboutHome" style="margin-left:10px;font-family:AgencyFB;height:auto;width:95%;margin-bottom:80px;">
 			<h5>About this home</h5>
-			<p class="isiDetail" style="font-size:1em;font-weight:none;">Comfy little home for family holiday. Another facilities are kitchen, air conditioner in every room, refrigerator, and pantry.</p>			
+			<p class="isiDetail" style="font-size:1em;font-weight:none;">Comfy little home for family holiday. Another facilities are kitchen, air conditioner in every room, refrigerator, and pantry.</p>
 		</div>
-		
-		<footer>			
+
+		<footer>
 			<div class="price" style="text-align:left;margin-top:10px;margin-left:10px;font-size:1.5em;font-weight:bold;float:left">Rp. 10.250.000,00</div><div style="float:left;text-align:left;font-size:1em;margin-top:15px;margin-left:5px;">per night</div>
 			<div class="captReview" style="font-size:1em;margin-left:10px;clear:both;position:absolute;bottom:10px;">Rates 4 of 5</div>
 			<form class="buatDetail" method='post' style="text-align:right;padding-right:10px;">
@@ -155,49 +158,148 @@
   </template>
 	</body>
   <script type="text/javascript">
-  var server = "http://workastation.hol.es/sdpajax/server.php";
-  function getIp() {
-      ons.notification.prompt({message: 'Masukkan ip server'}).then(function(answer) {
-          if(answer.trim() == '')
-              getIp();
-          else {
-              server += answer;
-              server += '/sdpajax/server.php';
-          }
-      });
-  }
-    document.addEventListener("deviceready", onDeviceReady, false);
-    ons.ready(function() {
-          /*getIp();
-          $.post(server, {'user': 'timo', 'tipe': 2},function(data){
-            cordova.plugins.notification.local.schedule({
-                id: 10,
-                title: "Berhasil Login",
-                text: "Halo "+data['nama']+"!"
-            });
-          });
+  var app = {
+      // Application Constructor
+      initialize: function() {
+          this.bindEvents();
+      },
+      // Bind Event Listeners
+      //
+      // Bind any events that are required on startup. Common events are:
+      // 'load', 'deviceready', 'offline', and 'online'.
+      bindEvents: function() {
+          document.addEventListener('deviceready', this.onDeviceReady, false);
+      },
+      // deviceready Event Handler
+      //
+      // The scope of 'this' is the event. In order to call the 'receivedEvent'
+      // function, we must explicity call 'app.receivedEvent(...);'
+      onDeviceReady: function() {
+          app.receivedEvent('deviceready');
+      },
+      // Update DOM on a Received Event
+      receivedEvent: function(id) {
+          var parentElement = document.getElementById(id);
+          var listeningElement = parentElement.querySelector('.listening');
+          var receivedElement = parentElement.querySelector('.received');
 
-          // makeNotification(0, 'ini title', 'ini isi dari text');
-          /*cordova.plugins.notification.local.on("click", function(notification) {
-              cordova.plugins.notification.local.clearAll();
-          });*/
+          listeningElement.setAttribute('style', 'display:none;');
+          receivedElement.setAttribute('style', 'display:block;');
 
+          console.log('Received Event: ' + id);
 
-          // navigator.vibrate([300, 10, 150, 10, 150]);
-      });
-      $(document).ready(onDeviceReady());
-    function onDeviceReady(){
-      //getIp();
-      $.post(server, {'user': localStorage.getItem("storageName"), 'tipe': 3},function(data){
-        data = JSON.parse(data);
-        cordova.plugins.notification.local.schedule({
-            id: 5,
-            title: "Berhasil Login",
-            text: "Halo "+data['name']+"!"
-        });
-      });
+          // start to initialize PayPalMobile library
+          app.initPaymentUI();
+      },
+      initPaymentUI : function () {
+        var clientIDs = {
+          "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
+          "PayPalEnvironmentSandbox": "YOUR_SANDBOX_CLIENT_ID"
+        };
+        PayPalMobile.init(clientIDs, app.onPayPalMobileInit);
 
+      },
+      onSuccesfulPayment : function(payment) {
+        console.log("payment success: " + JSON.stringify(payment, null, 4));
+      },
+      // This code is only used for independent card.io scanning abilities
+      onCardIOComplete: function(card) {
+        console.log("Card Scanned success: " + JSON.stringify(card, null, 4));
+      },
+      onAuthorizationCallback : function(authorization) {
+        console.log("authorization: " + JSON.stringify(authorization, null, 4));
+      },
+      createPayment : function () {
+        // for simplicity use predefined amount
+        // optional payment details for more information check [helper js file](https://github.com/paypal/PayPal-Cordova-Plugin/blob/master/www/paypal-mobile-js-helper.js)
+        var paymentDetails = new PayPalPaymentDetails("50.00", "0.00", "0.00");
+        var payment = new PayPalPayment("50.00", "USD", "Awesome Sauce", "Sale", paymentDetails);
+        return payment;
+      },
+      configuration : function () {
+        // for more options see `paypal-mobile-js-helper.js`
+        var config = new PayPalConfiguration({merchantName: "My test shop", merchantPrivacyPolicyURL: "https://mytestshop.com/policy", merchantUserAgreementURL: "https://mytestshop.com/agreement"});
+        return config;
+      },
+      onPrepareRender : function() {
+        // buttons defined in index.html
+        //  <button id="buyNowBtn"> Buy Now !</button>
+        //  <button id="buyInFutureBtn"> Pay in Future !</button>
+        //  <button id="profileSharingBtn"> ProfileSharing !</button>
+        //  <button id="cardScanBtn">Advanced: Use card.io scan only</button>
+        var buyNowBtn = document.getElementById("buyNowBtn");
+        var buyInFutureBtn = document.getElementById("buyInFutureBtn");
+        var profileSharingBtn = document.getElementById("profileSharingBtn");
+        var cardScanBtn = document.getElementById("cardScanBtn");
+
+        buyNowBtn.onclick = function(e) {
+          // single payment
+          PayPalMobile.renderSinglePaymentUI(app.createPayment(), app.onSuccesfulPayment, app.onUserCanceled);
+          alert("test");
+        };
+
+        buyInFutureBtn.onclick = function(e) {
+          // future payment
+          PayPalMobile.renderFuturePaymentUI(app.onAuthorizationCallback, app.onUserCanceled);
+        };
+
+        profileSharingBtn.onclick = function(e) {
+          // profile sharing
+          PayPalMobile.renderProfileSharingUI(["profile", "email", "phone", "address", "futurepayments", "paypalattributes"], app.onAuthorizationCallback, app.onUserCanceled);
+        };
+
+        cardScanBtn.onclick = function(e) {
+          // card.io scanning independent of paypal payments.
+          // This is used for cases where you only need to scan credit cards and not use PayPal as funding option.
+          CardIO.scan({
+                       "requireExpiry": true,
+                       "requireCVV": false,
+                       "requirePostalCode": false,
+                       "restrictPostalCodeToNumericOnly": true
+                     },
+                     app.onCardIOComplete,
+                     app.onUserCanceled
+                   );
+         };
+      },
+      onPayPalMobileInit : function() {
+        // must be called
+        // use PayPalEnvironmentNoNetwork mode to get look and feel of the flow
+        PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", app.configuration(), app.onPrepareRender);
+      },
+      onUserCanceled : function(result) {
+        console.log(result);
+      }
+  };
+
+  app.initialize();
+    window.fn = {};
+    window.fn.open = function() {
+        let menu = document.getElementById('menu');
+        menu.open();
     };
+
+    window.fn.close = function() {
+        let menu = document.getElementById('menu');
+        menu.close();
+    };
+    function makeNotification() {
+        cordova.plugins.notification.local.schedule({
+            id: 1,
+            title: "Coba Coba",
+            text: "Hai Hai Timo"
+        });
+    };
+
+  /*
+
+  function onLoad() {
+      document.addEventListener("deviceready", onDeviceReady, false);
+  }
+  function onDeviceReady() {
+    app.initPaymentUI();
+  }
+  var server = "http://workastation.hol.es/sdpajax/server.php";
   function myfunc(){
     window.plugins.googleplus.login({},function (obj) {
       alert(JSON.stringify(obj)); // do something useful instead of alerting
@@ -266,25 +368,8 @@
       }
     }
   }
-  window.fn = {};
-    window.fn.open = function() {
-        let menu = document.getElementById('menu');
-        menu.open();
-    };
-
-    window.fn.close = function() {
-        let menu = document.getElementById('menu');
-        menu.close();
-    };
-    function makeNotification() {
-        cordova.plugins.notification.local.schedule({
-            id: 1,
-            title: "Coba Coba",
-            text: "Hai Hai Timo"
-        });
-    };
-
-  app.initialize();
-
+  */
   </script>
+
+  <script type="text/javascript" src="js/paypal-mobile-js-helper.js"></script>
 </html>
