@@ -97,8 +97,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', end
     width: 200px;
     height: 11em;
 	margin: 10px 0 5px 10px;
-	border: solid 1px #EEEEEE;
 	transition: box-shadow 0.3s, border 0.3s;
+}
+
+.gbr{
+	border: solid 1px #EEEEEE;
 }
 
 .horizontal-menu-fav {

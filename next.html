@@ -67,8 +67,8 @@
 		  <span class="header-slider">For You</span>
 		  <div class='seeMore'><a href="see_more.html" style="text-decoration:none;color:#f94d6e;">See More ></a></div>
 			<div class="horizontal-menu" style="display:absolute;" id="foryou">
-        <a href="detail.html">
-            <div class="detailRestoranBtn" style="display:inline-block;">
+			<a href="detail.html">
+            <div class="detailRestoranBtn" style="display:inline-block;margin-bottom:20px;">
 				<div class="img-feature"><center><img src='img/src1.png' style="width:100%;height:100%;"></center></div>
 				<div class="content">
 					<div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:15%;height:15%"></div>
@@ -204,12 +204,9 @@
     function onDeviceReady(){
       var ini = localStorage.getItem("storageName");
       //alert(ini);
-      $.post(server, {'tipe': "ambilSemuaRumah"},function(data){
-        data = JSON.parse(data);
-        $("#foryou").html('<div class="detailRestoranBtn" style="display:inline-block;"><div class="img-feature"><center><img src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:15%;height:15%"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
-        $("#foryou").html($("#foryou").html()+'<div class="detailRestoranBtn" style="display:inline-block;"><div class="img-feature"><center><img src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:15%;height:15%"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
-        $("#foryou").html($("#foryou").html()+'<div class="detailRestoranBtn" style="display:inline-block;"><div class="img-feature"><center><img src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:15%;height:15%"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
-        $("#foryou").css("margin-bottom:1000px;");
+	  $("#foryou").html('<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
+        $("#foryou").html($("#foryou").html()+'<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
+        $("#foryou").html($("#foryou").html()+'<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
         /*$("#foryou").html($("#foryou").html()+'');
         $("#foryou").html($("#foryou").html()+'');
         $("#foryou").html($("#foryou").html()+'');
@@ -225,6 +222,9 @@
         $("#foryou").html($("#foryou").html()+'');
         $("#foryou").html($("#foryou").html()+'');
         $("#foryou").html($("#foryou").html()+'');*/
+      $.post(server, {'tipe': "ambilSemuaRumah"},function(data){
+        data = JSON.parse(data);
+        
       });
     }
     $(document).ready(onDeviceReady);
