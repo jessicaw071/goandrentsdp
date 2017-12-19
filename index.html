@@ -91,16 +91,23 @@
   };
   function pindah(){
     var getusername = document.getElementById('txtUser').value;
+    var getpassword = document.getElementById('txtPass').value;
+    $.post(server, {'pass':getpassword,'tipe': "mintamd5php"},function(data){
+      getpassword = data;
+      alert(getpassword);
+    });
     $.post(server, {'tipe': "ajaxLogin"},function(data){
       data = JSON.parse(data);
       var ketemu = false;
       for(var i = 0; i < data.length; i++){
         if(data[i].email == getusername){
-          localStorage.setItem("storageName",getusername);
-          alert("Berhasil Login");
-          window.location = "next.html";
-          ketemu=true;
-          break;
+          if(data[i].password == getpassword){
+            localStorage.setItem("storageName",getusername);
+            alert("Berhasil Login");
+            window.location = "next.html";
+            ketemu=true;
+            break;
+          }
         }
       }
       if(!ketemu){
