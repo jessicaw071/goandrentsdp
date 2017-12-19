@@ -1,6 +1,15 @@
 body{
 	margin:0px;
 }
+.bodylogin{
+	margin:0px;/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00b7ea+0,004e66+100 */
+background: #00b7ea; /* Old browsers */
+background: -moz-linear-gradient(left,  #00b7ea 0%, #004e66 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #00b7ea 0%,#004e66 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #00b7ea 0%,#004e66 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#004e66',GradientType=1 ); /* IE6-9 */
+
+}
 
 #iCont{
 	width:100%;
@@ -39,9 +48,27 @@ body{
 	margin-bottom:10px;
 	padding-left:10px;
 }
+.centerlogin{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00b7ea+0,004e66+100 */
+background: #00b7ea; /* Old browsers */
+background: -moz-linear-gradient(left,  #00b7ea 0%, #004e66 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #00b7ea 0%,#004e66 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #00b7ea 0%,#004e66 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#004e66',GradientType=1 ); /* IE6-9 */
 
+}
 .cTitle{
 	text-align:center;
+}
+.cTitleLogin{
+	text-align:center;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00b7ea+0,004e66+100 */
+background: #00b7ea; /* Old browsers */
+background: -moz-linear-gradient(left,  #00b7ea 0%, #004e66 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #00b7ea 0%,#004e66 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #00b7ea 0%,#004e66 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#004e66',GradientType=1 ); /* IE6-9 */
+
 }
 
 .horizontal-menu {
@@ -147,7 +174,6 @@ body{
 	margin-left:20px;
 	left:0px;
 }
-
 .cFormLogin input[type="text"], .cFormLogin input[type="password"], .cFormLogin input[type="date"], .cFormLogin select{
 	font-family: HNLight;
 	font-size: 1em;
@@ -158,6 +184,7 @@ body{
 	border: solid 1px #dcdcdc;
 	border-radius: 3px;
 	transition: box-shadow 0.3s, border 0.3s;
+
 }
 
 #cmbGender{
@@ -184,7 +211,22 @@ form{
 	color: white;
     background-color:#B71C1C;
     border:1px solid #B71C1C;
-    border-radius:3px;
+    border-radius:10px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+    cursor:pointer;
+    display:block;
+}
+
+.cBtnRegister{
+	font-family: HNLight;
+	margin-bottom:10px;
+    font-size: 1em;
+	width: 18em;
+	height: 2em;
+	color: white;
+    background-color:#2a5d75;
+    border:1px solid #2a5d75;
+    border-radius:10px;
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
     cursor:pointer;
     display:block;
@@ -198,7 +240,7 @@ form{
 	color: white;
     background-color:#0624bf;
     border:1px solid #0624bf;
-    border-radius:3px;
+    border-radius:10px;
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
     cursor:pointer;
     display:block;
@@ -214,7 +256,7 @@ form{
 	color: white;
     background-color:#ff4747;
     border:1px solid #ff4747;
-    border-radius:3px;
+    border-radius:10px;
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
     cursor:pointer;
     display:block;

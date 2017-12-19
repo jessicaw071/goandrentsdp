@@ -6,7 +6,7 @@
   <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
   <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
   <script type="text/javascript" src="cordova.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
+  <!--<script type="text/javascript" src="js/index.js"></script>-->
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
@@ -19,31 +19,33 @@
   		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 
-	<body>
+	<body class="bodylogin">
 		<div id='iCont' style="position:absolute;height:50%;margin-top:30%;">
-			<div class='cTitle'>
+			<div class='cTitleLogin' style='font-family: HNLight; color:white;'>
 				<img src='logo.png' width='70%'>
+        <p style='font-size:20px;'><b>Welcome to Go & Rent</b></p>
+        <br>
+        <br>
+        <br>
 			</div>
 			<div class='cFormLogin'>
 				<form method='post'>
-						<center><input type="text" placeholder="Username" name="user" id="txtUser">
+						<center class="centerlogin"><input type="text" placeholder="Username" name="user" id="txtUser">
 						<br>
 						<input type="password" placeholder="Password" name="pass" id="txtPass">
 						<br>
-						<div class='cRekomenRegis'> Don't have an account? <a href='register.html'> Sign Up </a> here! </div>
+            <br>
+						<input type="button" onclick="pindahregister()" class='cBtnRegister' name="btnRegister" value="Create Account">
 						<input type="button" onclick="pindah()" class='cBtnLogin' name="btnLogin" value="Login">
-
 						<input type="button" onclick="myfunc()" class='cBtnGoogle' name="btnGoogle" value="Google+">
 						<input type="button" onclick="myfuncfb()" class='cBtnFacebook' name="btnFacebook" value="Facebook"></center>
 				</form>
 			</div>
-            <div id="cobaAjax">
-
-            </div>
 		</div>
 
 	</body>
   <script type="text/javascript">
+  var server = "http://192.168.1.3/sdpajax/server.php";
     document.addEventListener("deviceready", onDeviceReady, false);
     function alertDismissed() {
     // do something
@@ -54,56 +56,10 @@
     };
 
     function onDeviceReady(){
-        window.plugins.googleplus.disconnect(
-          function (msg) {
-            alert("Berhasil Logout Google"); // do something useful instead of alerting
-          },function (msg) {
-            alert("Gagal Logout Google"); // do something useful instead of alerting
-          }
-        );
-        facebookConnectPlugin.logout(function (msg) {
-          alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-        }, function (msg) {
-          alert("Gagal Logout Facebook"); // do something useful instead of alerting
-        });
+
     }
 
     function onBackKeyDown() {
-      var x = confirm("Are you sure ?");
-      window.plugins.googleplus.disconnect(
-        function (msg) {
-          alert("Berhasil Logout Google"); // do something useful instead of alerting
-        },function (msg) {
-          alert("Gagal Logout Google"); // do something useful instead of alerting
-          x=false;
-          alert(msg);
-
-        }
-      );
-      facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
-        alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-      }, function (msg) {
-        alert("Gagal Logout Facebook"); // do something useful instead of alerting
-        x=false;
-        alert(msg);
-      });
-      facebookConnectPlugin.logout(function (msg) {
-        alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-      }, function (msg) {
-        alert("Gagal Logout Facebook"); // do something useful instead of alerting
-        x=false;
-        alert(msg);
-      });
-
-      if(x){
-        if (navigator.app) {
-            navigator.app.exitApp();
-        } else if (navigator.device) {
-            navigator.device.exitApp();
-        } else {
-            window.close();
-        }
-      }
     }
   function myfunc(){
     window.plugins.googleplus.login({},function (obj) {
@@ -134,18 +90,90 @@
   });
   };
   function pindah(){
-
-    var getInput = document.getElementById('txtUser').value;
-    localStorage.setItem("storageName",getInput);
-    window.location = "next.html";
-      navigator.notification.alert(
-          'You Are Login!',  // message
-          alertDismissed,         // callback
-          'Notif Login',            // title
-          'Done'                  // buttonName
-      );
+    var getusername = document.getElementById('txtUser').value;
+    $.post(server, {'tipe': "ajaxLogin"},function(data){
+      data = JSON.parse(data);
+      var ketemu = false;
+      for(var i = 0; i < data.length; i++){
+        if(data[i].email == getusername){
+          localStorage.setItem("storageName",getusername);
+          alert("Berhasil Login");
+          window.location = "next.html";
+          ketemu=true;
+          break;
+        }
+      }
+      if(!ketemu){
+        alert("Username Atau password salah!");
+      }
+    });
+    //window.location = "next.html";
+  }
+  function pindahregister(){
+    window.location = "register.html";
   }
   app.initialize();
+  /*
 
+  cordova.plugins.notification.local.schedule({
+      id: 1,
+      title: "Berhasil Login",
+      text: "Halo "+data['name']+"!"
+  });
+  navigator.notification.alert(
+      'You Are Login!',  // message
+      alertDismissed,         // callback
+      'Notif Login',            // title
+      'Done'                  // buttonName
+  );
+  window.plugins.googleplus.disconnect(
+    function (msg) {
+      alert("Berhasil Logout Google"); // do something useful instead of alerting
+    },function (msg) {
+      alert("Gagal Logout Google"); // do something useful instead of alerting
+    }
+  );
+  facebookConnectPlugin.logout(function (msg) {
+    alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+  }, function (msg) {
+    alert("Gagal Logout Facebook"); // do something useful instead of alerting
+  });
+
+    var x = confirm("Are you sure ?");
+    window.plugins.googleplus.disconnect(
+      function (msg) {
+        alert("Berhasil Logout Google"); // do something useful instead of alerting
+      },function (msg) {
+        alert("Gagal Logout Google"); // do something useful instead of alerting
+        x=false;
+        alert(msg);
+
+      }
+    );
+    facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
+      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+    }, function (msg) {
+      alert("Gagal Logout Facebook"); // do something useful instead of alerting
+      x=false;
+      alert(msg);
+    });
+    facebookConnectPlugin.logout(function (msg) {
+      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+    }, function (msg) {
+      alert("Gagal Logout Facebook"); // do something useful instead of alerting
+      x=false;
+      alert(msg);
+    });
+
+    if(x){
+      if (navigator.app) {
+          navigator.app.exitApp();
+      } else if (navigator.device) {
+          navigator.device.exitApp();
+      } else {
+          window.close();
+      }
+    }
+  */
   </script>
 </html>
