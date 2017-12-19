@@ -190,7 +190,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', end
 
 }
 
-#cmbGender{
+#cmbGender, #cmbProvince{
 	font-size:1em;
 	height:3.5em;
 }
