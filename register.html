@@ -20,7 +20,7 @@
 	</head>
 
 	<body>
-		<div id='iCont' style="position:absolute;height:50%;margin-top:50%;">
+		<div id='iCont' style="position:absolute;height:50%;margin-top:30%;">
 			<div class='cTitle'>
 				<img src='logo.png' width='70%'>
 			</div>
@@ -31,6 +31,14 @@
 						<input type="password" placeholder="Password" name="pass" id="txtPass">
 						<br>
 						<input type="text" placeholder="Name" name="nama" id="txtNama">
+						<br>
+						<select name="comboGender" placeholder="Gender" id="cmbGender">
+							<option value="-" selected disabled>Gender</option>
+							<option value="Female">Female</option>
+							<option value="Male">Male</option>
+						</select>
+						<br>
+						<input type="date" name="datePickDoB" placeholder="Date of Birth" id="datePick">
 						<br>
 						<input type="button" onclick="regis()" class='cBtnLogin' name="btnRegis" value="Register">
 

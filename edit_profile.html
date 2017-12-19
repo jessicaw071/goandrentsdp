@@ -78,17 +78,25 @@
         </div>
         </ons-toolbar>
 		
-		<div class="contProfile" style="width:100%;height:auto;">
+		<div class="contProfile" style="width:100%;height:auto;margin-bottom:100px;">
 			<div class="fotoProfile" style="width:100px;height:100px;position:relative;margin:auto;margin-top:20px;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;margin-bottom:10px;"></div>
 			<p align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;"><a href="#">Change Photo</a><p>
 			<p align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;">Member since August 2017</p>
 			<form method='post' class="editProf" align="left">
-				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Full name</p>
-				<input type="text" name="txtName" value="Kenji Andrean">
-				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Email</p>
-				<input type="text" name="txtEmail" value="kenjiandrean@gmail.com">
-				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Password</p>
-				<input type="password" name="txtPassword" value="1234asdf">
+				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;color:gray;">Full name</p>
+				<input type="text" name="txtName" value="Kenji Andrean"><br>
+				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Email</p>
+				<input type="text" name="txtEmail" value="kenjiandrean@gmail.com"><br>
+				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Password</p>
+				<input type="password" name="txtPassword" value="1234asdf"><br>
+				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Gender</p>
+				<select name="comboGenderEditProf" placeholder="Gender" style="height:3em">
+					<option value="-" selected disabled>Gender</option>
+					<option value="Female">Female</option>
+					<option value="Male">Male</option>
+				</select><br>
+				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Date of Birth</p>
+				<input type="date" name="dateDoB" min="1980-01-01" value="1997-12-01"><br>
 		</div>
 		
 		<footer style="text-align:right;padding-right:20px;">
