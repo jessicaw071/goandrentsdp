@@ -80,36 +80,94 @@
 		
 		<div class="contProfile" style="width:100%;height:auto;margin-bottom:100px;margin-top:10px;">
 			<form method='post' class="editProf" align="left">
-				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;color:gray;">Full name</p>
-				<input type="text" id="txtName" name="name" value=""><br>
-				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Email</p>
-				<input type="text" id="txtEmail" name="email" value=""><br>
-				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">ID Number</p>
-				<input type="text" id="txtID" name="ktp" value=""><br>
+				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;color:gray;">House Name</p>
+				<input type="text" id="txtHouseName" name="houseName" value=""><br>
+				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Address</p>
+				<input type="text" id="txtLocation" name="location" value=""><br>
+				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Province</p>
+				<select name="comboProvince" placeholder="Gender" id="cmbProvince" >
+					<option value="-" selected disabled>---</option>
+					<option value="Aceh">Aceh</option>
+					<option value="Bali">Bali</option>
+					<option value="Banten">Banten</option>
+					<option value="Bengkulu">Bengkulu</option>
+					<option value="Gorontalo">Gorontalo</option>
+					<option value="Jakarta">Jakarta</option>
+					<option value="Jambi">Jambi</option>
+					<option value="Jawa Barat">Jawa Barat</option>
+					<option value="Jawa Tengah">Jawa Tengah</option>
+					<option value="Jawa Timur">Jawa Timur</option>
+					<option value="Kalimantan Barat">Kalimantan Barat</option>
+					<option value="Kalimantan Selatan">Kalimantan Selatan</option>
+					<option value="Kalimantan Tengah">Kalimantan Tengah</option>
+					<option value="Kalimantan Timur">Kalimantan Timur</option>
+					<option value="Kalimantan Utara">Kalimantan Utara</option>
+					<option value="Kepulauan Bangka Belitung">Kepulauan Bangka Belitung</option>
+					<option value="Kepulauan Riau">Kepulauan Riau</option>
+					<option value="Lampung">Lampung</option>
+					<option value="Maluku">Maluku</option>
+					<option value="Maluku Utara">Maluku Utara</option>
+					<option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
+					<option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
+					<option value="Papua">Papua</option>
+					<option value="Papua Barat">Papua Barat</option>
+					<option value="Riau">Riau</option>
+					<option value="Sulawesi Barat">Sulawesi Barat</option>
+					<option value="Sulawesi Selatan">Sulawesi Selatan</option>
+					<option value="Sulawesi Tengah">Sulawesi Tengah</option>
+					<option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+					<option value="Sulawesi Utara">Sulawesi Utara</option>
+					<option value="Sumatera Barat">Sumatera Barat</option>
+					<option value="Sumatera Selatan">Sumatera Selatan</option>
+					<option value="Sumatera Utara">Sumatera Utara</option>
+					<option value="Yogyakarta">Yogyakarta</option>
+				</select>
+				<p align="left" style="margin-top:70px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">City</p>
+				<input type="text" id="txtCity" name="city" value=""><br>
+				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Districts</p>
+				<input type="text" id="txtKecamatan" name="Kecamatan" value=""><br>
+				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Postal Code</p>
+				<input type="text" id="txtPostalCode" name="postalCode" value=""><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Phone Number</p>
 				<input type="text" id="txtPhone" name="phone" value=""><br>
-				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Check In</p>
-				<input type="date" id="dateCI" name="dateCheckIn" min="" value="" disabled><br>
-				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Check Out</p>
-				<input type="date" id="dateCO" name="dateCheckIn" min="" value="" disabled><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Guests</p>
 				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
 					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
 					<input type="text" name="numberGuest" id="txtNumberGuests" value="1" style="width:60%;float:left;position:relative">
 					<div id="plusButton" style="width:2em;height:2em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
 				</div>
-				<p align="left" style="margin-top:60px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Location Detail</p>
-				<p id="locationDetail" align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.3em;font-weight:none;position:relative;color:gray;">Ngagel Jaya Tengah No. 70-73, Kecamatan Gubeng, Surabaya, Jawa Timur</p>
-				<p align="left" style="margin-top:20px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:absolute;color:gray;float:left;color:lightgray;">Harga permalam x malam</p>
-				<p id="subTotal" align="left" style="margin-top:20px;right:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:absolute;color:gray;;color:lightgray;">Rp xxxxxxxx</p><br><br>
-				<p align="left" style="margin-top:20px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:absolute;color:gray;float:left;color:lightgray;">Service Fee (10%)</p>
-				<p id="serviceFee" align="left" style="margin-top:20px;right:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:absolute;color:gray;;color:lightgray;">Rp xxxxxxxx</p><br><br>
-				<p align="left" style="margin-top:20px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:absolute;color:gray;float:left">Total</p>
-				<p id="grandTotal" align="left" style="margin-top:20px;right:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:absolute;color:gray;margin-bottom:80px;">Rp xxxxxxxx</p>				
+				<p align="left" style="margin-top:60px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Bedrooms</p>
+				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
+					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+					<input type="text" name="numberBedrooms" id="txtNumberBedrooms" value="1" style="width:60%;float:left;position:relative">
+					<div id="plusButton" style="width:2em;height:2em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+				</div>
+				<p align="left" style="margin-top:60px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Beds</p>
+				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
+					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+					<input type="text" id="txtNumberBeds" name="numberBeds" value="1" style="width:60%;float:left;position:relative">
+					<div id="plusButton" style="width:2em;height:2em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+				</div>
+				<p align="left" style="margin-top:60px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Bathrooms</p>
+				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
+					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+					<input type="text" id="txtNumberBeds" name="numberBeds" value="1" style="width:60%;float:left;position:relative">
+					<div id="plusButton" style="width:2em;height:2em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+				</div>
+				<p align="left" style="margin-top:60px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">About this House</p>
+				<textarea id="txtAbout" name="aboutHouse" placeholder="Write your description..." style="width:90%;height:100px;position:absolute;left:0px;margin-left:20px;padding:10px 10px 10px 10px;"></textarea><br>
+				<p align="left" style="margin-top:90px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Price per Night (IDR)</p>
+				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
+					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+					<input type="text" id="txtPrice" name="Price" value="100000" style="width:60%;float:left;position:relative">
+					<div id="plusButton" style="width:2em;height:2em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+				</div>
+				<p align="left" style="margin-top:70px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Photos</p>
+				<input type="file" name="txtPhone" value="" style="width:90%;height:100px;position:absolute;left:0px;margin-left:20px;"><br>
 		</div>
 		
 		<footer style="text-align:right;padding-right:20px;">
-				<input type="button" name="btnBooking" value="Book" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
+				<input type="button" name="btnHosting" value="Host" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
 			</form>
 		</footer>
   </ons-page>
