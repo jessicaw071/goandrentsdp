@@ -8,6 +8,7 @@
   <script type="text/javascript" src="cordova.js"></script>
   <!--<script type="text/javascript" src="js/index.js"></script>-->
   <script src="node_modules/onsenui/js/onsenui.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
 	<meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -198,37 +199,73 @@
   </template>
 	</body>
   <script type="text/javascript">
+  var latkita=0,longkita=0;
   var server = "http://192.168.1.3/sdpajax/server.php";
+  function generateRandomLong() {
+    var num = (Math.random()*180).toFixed(3);
+    var posorneg = Math.floor(Math.random());
+    if (posorneg == 0) {
+        num = num * -1;
+    }
+    return num;
+  }
+  // LATITUDE -90 to +90
+  function generateRandomLat() {
+      var num = (Math.random()*90).toFixed(3);
+      var posorneg = Math.floor(Math.random());
+      if (posorneg == 0) {
+          num = num * -1;
+      }
+      return num;
+  }
+  var onSuccess = function(position) {
+        alert('Latitude: '          + position.coords.latitude          + '\n' +
+              'Longitude: '         + position.coords.longitude         + '\n' +
+              'Altitude: '          + position.coords.altitude          + '\n' +
+              'Accuracy: '          + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '           + position.coords.heading           + '\n' +
+              'Speed: '             + position.coords.speed             + '\n' +
+              'Timestamp: '         + position.timestamp                + '\n');
+        latkita = position.coords.latitude;
+        longkita = position.coords.longitude;
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latkita, longkita), new google.maps.LatLng(-7.229924, 112.722628));
+        alert("Distance : "+distance);
+    };
 
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady(){
       var ini = localStorage.getItem("storageName");
       //alert(ini);
-	  $("#foryou").html('<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
-        $("#foryou").html($("#foryou").html()+'<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
-        $("#foryou").html($("#foryou").html()+'<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="img/src1.png" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>Kebab Kings, Dhar...</b></h5><span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span></div></div>');
-        /*$("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');
-        $("#foryou").html($("#foryou").html()+'');*/
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
       $.post(server, {'tipe': "ambilSemuaRumah"},function(data){
         data = JSON.parse(data);
-        
+        var x = Math.floor((Math.random() * data.length));
+        var y = Math.floor((Math.random() * data.length));
+        var z = Math.floor((Math.random() * data.length));
+        $("#foryou").html('<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="'+data[x].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>'+data[x].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[x].kapasitas+' Orang &bull; '+(Math.floor((google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latkita, longkita), new google.maps.LatLng(parseInt(data[x].longlat_rumah.split(" ")[0]),parseInt(data[x].longlat_rumah.split(" ")[1])))/1000)*1000)/1000)+' km</span></div></div>');
+        $("#foryou").html($("#foryou").html()+'<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="'+data[y].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>'+data[y].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[y].kapasitas+' Orang &bull; '+(Math.floor((google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latkita, longkita), new google.maps.LatLng(parseInt(data[y].longlat_rumah.split(" ")[0]),parseInt(data[y].longlat_rumah.split(" ")[1])))/1000)*1000)/1000)+' km</span></div></div>');
+        $("#foryou").html($("#foryou").html()+'<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="'+data[z].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>'+data[z].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[z].kapasitas+' Orang &bull; '+(Math.floor((google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latkita, longkita), new google.maps.LatLng(parseInt(data[z].longlat_rumah.split(" ")[0]),parseInt(data[z].longlat_rumah.split(" ")[1])))/1000)*1000)/1000)+' km</span></div></div>');
       });
     }
     $(document).ready(onDeviceReady);
-    /*function getIp() {
+    /*
+
+    $.post(server, {'tipe': "ambilSemuaRumah"},function(data){
+      data = JSON.parse(data);
+      for(var i = 0 ; i < data.length; i++){
+        $.post(server, {'id': data[i].id_rumah ,'tipe': "updateLongLat",'long':generateRandomLong() , 'lat' : generateRandomLat},function(data){
+
+        });
+      }
+    });
+    function getIp() {
         ons.notification.prompt({message: 'Masukkan ip server'}).then(function(answer) {
             if(answer.trim() == '')
                 getIp();
