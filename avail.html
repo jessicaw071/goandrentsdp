@@ -81,9 +81,9 @@
 		<div class="contProfile" style="width:100%;height:auto;margin-bottom:100px;">
 			<form method='post' class="editProf" align="left">
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Check In</p>
-				<input type="date" id="dateCI" name="dateCheckIn" min="1980-01-01" value=""><br>
+				<input type="date" id="dateCI" name="dateCheckIn" min="" value=""><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Check Out</p>
-				<input type="date" id="dateCO" name="dateCheckIn" min="1980-01-01" value=""><br>
+				<input type="date" id="dateCO" name="dateCheckIn" min="" value=""><br>
 		</div>
 		
 		<footer style="text-align:right;padding-right:20px;">
@@ -129,6 +129,8 @@
       $(document).ready(onDeviceReady());
     function onDeviceReady(){
       //getIp();
+	  document.getElementById('dateCI').value = new Date().toDateInputValue();
+	  document.getElementById('dateCO').value = new Date().toDateInputValue();
       $.post(server, {'user': localStorage.getItem("storageName"), 'tipe': 3},function(data){
         data = JSON.parse(data);
         cordova.plugins.notification.local.schedule({
