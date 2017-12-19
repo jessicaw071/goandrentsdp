@@ -56,14 +56,26 @@
     };
 
     function onDeviceReady(){
-
+      var ini = localStorage.getItem("storageName");
+      //alert(ini);
     }
 
     function onBackKeyDown() {
     }
   function myfunc(){
     window.plugins.googleplus.login({},function (obj) {
-      alert(JSON.stringify(obj)); // do something useful instead of alerting
+      $.post(server, {'user': obj.email ,'pass': "google", 'nama': obj.displayName, 'tipe': "ajaxRegister"},function(data){
+        if(data == "a"){
+
+        }else if(data == "b"){
+          localStorage.setItem("storageName",obj.email);
+          alert("Berhasil Login");
+          window.location = "next.html";
+        }else{
+          alert(data);
+        }
+      });
+      //alert(JSON.stringify(obj)); // do something useful instead of alerting
     },
     function (msg) {
       alert('error: ' + msg);
@@ -74,7 +86,18 @@
     //calling api after login success
     facebookConnectPlugin.api("/me?fields=email,name,birthday",['email','user_birthday','public_profile'],function(userData){
     //API success callback
-      alert("User Info : "+userData.email+"\n Hello ! Our Beloved : "+userData.name +"\n We Want to Remind You that your Birthday is : "+userData.birthday);
+    $.post(server, {'user': userData.email ,'pass': "google", 'nama': userData.name, 'tipe': "ajaxRegister"},function(data){
+      if(data == "a"){
+
+      }else if(data == "b"){
+        localStorage.setItem("storageName",userData.email);
+        alert("Berhasil Login");
+        window.location = "next.html";
+      }else{
+        alert(data);
+      }
+    });
+
       },function(error){
     //API error callback
       alert(JSON.stringify(error));
@@ -91,10 +114,10 @@
   };
   function pindah(){
     var getusername = document.getElementById('txtUser').value;
+    getusername = getusername.toLowerCase();
     var getpassword = document.getElementById('txtPass').value;
     $.post(server, {'pass':getpassword,'tipe': "mintamd5php"},function(data){
       getpassword = data;
-      alert(getpassword);
     });
     $.post(server, {'tipe': "ajaxLogin"},function(data){
       data = JSON.parse(data);
