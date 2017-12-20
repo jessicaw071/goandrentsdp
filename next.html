@@ -66,7 +66,7 @@
 
 		<div style="width:100%;height:calc(100% - 50px);">
 		  <span class="header-slider">For You</span>
-		  <div class='seeMore'><a href="see_more.html" style="text-decoration:none;color:#f94d6e;">See More ></a></div>
+		  <div class='seeMore' onclick="pindahSeemore('ambilSemuaRumah')">See More ></div>
 			<div class="horizontal-menu" style="display:absolute;" id="foryou">
 			<a href="detail.html">
             <div class="detailRestoranBtn" style="display:inline-block;margin-bottom:20px;">
@@ -105,7 +105,7 @@
         </div>
 
 		<span class="header-slider">Near Me</span>
-		<div class='seeMore'><a href="see_more.html" style="text-decoration:none;color:#f94d6e;">See More ></a></div>
+    <div class='seeMore' onclick="pindahSeemore('ambilNearme')">See More ></div>
             <div class="horizontal-menu" style="display:absolute;" id="nearme">
             <div class="detailRestoranBtn" style="display:inline-block;">
 				<div class="img-feature"><center><img src='img/src1.png' style="width:100%;height:100%;"></center></div>
@@ -142,7 +142,7 @@
         </div>
 
 		<span class="header-slider">High Rating</span>
-		<div class='seeMore'><a href="see_more.html" style="text-decoration:none;color:#f94d6e;">See More ></a></div>
+    <div class='seeMore' onclick="pindahSeemore('ambilHighRating')">See More ></div>
         <div class="horizontal-menu" style="display:absolute;" id="highrating">
             <div class="detailRestoranBtn" style="display:inline-block;">
 				<div class="img-feature"><center><img src='img/src1.png' style="width:100%;height:100%;"></center></div>
@@ -218,6 +218,10 @@
       }
       return num;
   }
+  function pindahSeemore(id){
+    localStorage.setItem("tipeName",id);
+    window.location = "see_more.html";
+  }
   var onSuccess = function(position) {
         /*alert('Latitude: '          + position.coords.latitude          + '\n' +
               'Longitude: '         + position.coords.longitude         + '\n' +
@@ -253,7 +257,7 @@
       ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
       //alert(ini);
       navigator.geolocation.getCurrentPosition(onSuccess, onError);
-      $.post(server, {'userskr' : ini ,'tipe': "ambilSemuaRumah"},function(data){
+      $.post(server, {'userskr' : ini ,'longkita' : longkita , 'latkita': latkita,'tipe': "ambilSemuaRumah"},function(data){
         data = JSON.parse(data);
         var x = Math.floor((Math.random() * data.length));
         var y = Math.floor((Math.random() * data.length));

@@ -53,7 +53,7 @@
           Go & Rent
         </div>
         </ons-toolbar>
-		
+
 		<div class="center">
     		<div class='cTitle'>
 				<div class='cFormDalam'>
@@ -61,17 +61,20 @@
 				</div>
       		</div>
         </div>
-        
+
 		<div style="width:100%;height:calc(100% - 50px);">
-			<div class="horizontal-menu-fav" style="display:absolute;">
-				<div class="detailFavorite" style="display:inline-block;">
-					<div class="img-feature"><center><img src='img/home.jpg' style="width:100%;height:100%;"></center></div>
-					<div class="content">
-						<h5><b>Kebab Kings, Dhar...</b></h5>
-						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
-					</div>
-				</div>	
-			</div>
+      <div id="isiSeemore">
+        <div class="horizontal-menu-fav" style="display:absolute;">
+  				<div class="detailFavorite" style="display:inline-block;">
+  					<div class="img-feature"><center><img src='img/home.jpg' style="width:100%;height:100%;"></center></div>
+  					<div class="content">
+  						<h5><b>Kebab Kings, Dhar...</b></h5>
+  						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
+  					</div>
+  				</div>
+  			</div>
+      </div>
+
 		</div>
 
        <footer>
@@ -95,117 +98,47 @@
   </template>
 	</body>
   <script type="text/javascript">
-  var server = "http://workastation.hol.es/sdpajax/server.php";
-  function getIp() {
-      ons.notification.prompt({message: 'Masukkan ip server'}).then(function(answer) {
-          if(answer.trim() == '')
-              getIp();
-          else {
-              server += answer;
-              server += '/sdpajax/server.php';
-          }
-      });
-  }
+  var server = "http://192.168.1.3/sdpajax/server.php";
+  var ini,ini2;
+  var latkita=0,longkita=0;
     document.addEventListener("deviceready", onDeviceReady, false);
-    ons.ready(function() {
-          /*getIp();
-          $.post(server, {'user': 'timo', 'tipe': 2},function(data){
-            cordova.plugins.notification.local.schedule({
-                id: 10,
-                title: "Berhasil Login",
-                text: "Halo "+data['nama']+"!"
-            });
-          });
+    var onSuccess = function(position) {
+          /*alert('Latitude: '          + position.coords.latitude          + '\n' +
+                'Longitude: '         + position.coords.longitude         + '\n' +
+                'Altitude: '          + position.coords.altitude          + '\n' +
+                'Accuracy: '          + position.coords.accuracy          + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                'Heading: '           + position.coords.heading           + '\n' +
+                'Speed: '             + position.coords.speed             + '\n' +
+                'Timestamp: '         + position.timestamp                + '\n');*/
+          latkita = position.coords.latitude;
+          longkita = position.coords.longitude;
+      };
 
-          // makeNotification(0, 'ini title', 'ini isi dari text');
-          /*cordova.plugins.notification.local.on("click", function(notification) {
-              cordova.plugins.notification.local.clearAll();
-          });*/
-
-
-          // navigator.vibrate([300, 10, 150, 10, 150]);
-      });
-      $(document).ready(onDeviceReady());
+      // onError Callback receives a PositionError object
+      //
+      function onError(error) {
+          alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
+      }
     function onDeviceReady(){
-      //getIp();
-      $.post(server, {'user': localStorage.getItem("storageName"), 'tipe': 3},function(data){
+      ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
+      ini2 = localStorage.getItem("tipeName");
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+      $.post(server, {'userskr' : ini ,'longkita' : longkita , 'latkita': latkita,'tipe': ini2},function(data){
         data = JSON.parse(data);
-        cordova.plugins.notification.local.schedule({
-            id: 5,
-            title: "Berhasil Login",
-            text: "Halo "+data['name']+"!"
-        });
+        if(ini2 == "ambilNearme"){
+          data.sort(function(a,b){
+            return a.distance - b.distance;
+          });
+        }
+          $("#isiSeemore").html("");
+        for(var i= 0;i<data.length;i++){
+          $("#isiSeemore").html($("#isiSeemore").html()+'<div class="horizontal-menu-fav" style="display:absolute;"><div class="detailFavorite" style="display:inline-block;"><div class="img-feature"><center><img src="'+data[i].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><h5><b>'+data[i].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[i].kapasitas+' Orang &bull; '+(Math.floor(data[i].distance*1000)/1000)+' km</span></div></div></div>');
+        }
       });
-
     };
-  function myfunc(){
-    window.plugins.googleplus.login({},function (obj) {
-      alert(JSON.stringify(obj)); // do something useful instead of alerting
-    },
-    function (msg) {
-      alert('error: ' + msg);
-    });
-  };
-  function myfuncfb(){
-    var fbLoginSuccess = function(result){
-    //calling api after login success
-    facebookConnectPlugin.api("/me?fields=email,name,birthday",['email','user_birthday','public_profile'],function(userData){
-    //API success callback
-      alert("User Info : "+userData.email+"\n Hello ! Our Beloved : "+userData.name +"\n We Want to Remind You that your Birthday is : "+userData.birthday);
-      },function(error){
-    //API error callback
-      alert(JSON.stringify(error));
-      });
-    }
-    //alert("user Info : "+userData.name+" Hello "+userData.email);
-    //document.getElementById("cobaAjax").innerHTML=JSON.stringify(userData);
-    //alert("UserInfo: "+userData['email'] + "\n Hello "+userData['name']+" Good to see you");
-    //};
-    facebookConnectPlugin.login(['email','user_birthday','public_profile'], fbLoginSuccess,
-    function loginError (error) {
-    alert(JSON.stringify(error));
-  });
-  };
-  function onBackKeyDown(){
-    makeNotification();
-    $.post(server, {'chat': chat, 'nama': nama, 'tipe': 2});
-
-    var x = confirm("Are you sure ?");
-    window.plugins.googleplus.disconnect(
-      function (msg) {
-        alert("Berhasil Logout Google"); // do something useful instead of alerting
-      },function (msg) {
-        alert("Gagal Logout Google"); // do something useful instead of alerting
-        x=false;
-        alert(msg);
-
-      }
-    );
-    facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
-      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-    }, function (msg) {
-      alert("Gagal Logout Facebook"); // do something useful instead of alerting
-      x=false;
-      alert(msg);
-    });
-    facebookConnectPlugin.logout(function (msg) {
-      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-    }, function (msg) {
-      alert("Gagal Logout Facebook"); // do something useful instead of alerting
-      x=false;
-      alert(msg);
-    });
-
-    if(x){
-      if (navigator.app) {
-          navigator.app.exitApp();
-      } else if (navigator.device) {
-          navigator.device.exitApp();
-      } else {
-          window.close();
-      }
-    }
-  }
+    $(document).ready(onDeviceReady);
   window.fn = {};
     window.fn.open = function() {
         let menu = document.getElementById('menu');
