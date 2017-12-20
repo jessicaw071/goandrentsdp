@@ -253,11 +253,15 @@
       });
       $.post(server, {'longkita' : longkita , 'latkita': latkita ,'tipe': "ambilNearme"},function(data){
         data = JSON.parse(data);
-        alert("hai");
-        alert(data[0].distance);
+        data.sort(function(a,b){
+          return a.distance - b.distance;
+        });
+        $("#nearme").html('<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="'+data[0].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>'+data[0].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[0].kapasitas+' Orang &bull; '+(Math.floor(data[0].distance*1000)/1000)+' km</span></div></div>');
+        $("#nearme").html($("#nearme").html()+'<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="'+data[1].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>'+data[1].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[1].kapasitas+' Orang &bull; '+(Math.floor(data[1].distance*1000)/1000)+' km</span></div></div>');
+        $("#nearme").html($("#nearme").html()+'<div class="detailRestoranBtn" style="display:inline-block;height:auto;"><div class="img-feature"><center><img class="gbr" src="'+data[2].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><div class="heart" style="margin-top:10px;margin-bottom:10px;"><img src="img/heart-full.png" style="width:25px;height:25px"></div><h5><b>'+data[2].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[2].kapasitas+' Orang &bull; '+(Math.floor(data[2].distance*1000)/1000)+' km</span></div></div>');
       });
     }
-    //$(document).ready(onDeviceReady);
+    $(document).ready(onDeviceReady);
     /*
 
     $.post(server, {'tipe': "ambilSemuaRumah"},function(data){
@@ -396,7 +400,7 @@
         });
     };
 
-  app.initialize();
+    app.initialize();
 
   </script>
 </html>
