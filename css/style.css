@@ -122,7 +122,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', end
 
  .horizontal-menu-fav .detailFavorite .img-feature{
 	float:left;
-	width:30%;
+	width:150px;
 	height:100%;
 	margin-right:10px;
 	border: solid 1px #EEEEEE;
@@ -130,7 +130,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', end
 
 .horizontal-menu-fav .content{
 	float:left;
-	width:50%;
+	width:calc(100%-150px);
 	height:100%;
 }
 

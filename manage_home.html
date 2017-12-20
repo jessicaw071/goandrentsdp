@@ -81,9 +81,9 @@
 		<div class="contProfile" style="width:100%;height:auto;margin-bottom:100px;margin-top:10px;">
 			<form method='post' class="editProf" align="left">
 				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;color:gray;">House Name</p>
-				<input type="text" id="txtHouseName" name="houseName" value=""><br>
+				<input type="text" id="txtHouseName" name="houseName" value="Comfy Single Room"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Address</p>
-				<input type="text" id="txtLocation" name="location" value=""><br>
+				<input type="text" id="txtLocation" name="location" value="Ngagel Madya VI No. 26-28"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Province</p>
 				<select name="comboProvince" placeholder="Gender" id="cmbProvince" >
 					<option value="-" selected disabled>---</option>
@@ -96,7 +96,7 @@
 					<option value="Jambi">Jambi</option>
 					<option value="Jawa Barat">Jawa Barat</option>
 					<option value="Jawa Tengah">Jawa Tengah</option>
-					<option value="Jawa Timur">Jawa Timur</option>
+					<option value="Jawa Timur" selected>Jawa Timur</option>
 					<option value="Kalimantan Barat">Kalimantan Barat</option>
 					<option value="Kalimantan Selatan">Kalimantan Selatan</option>
 					<option value="Kalimantan Tengah">Kalimantan Tengah</option>
@@ -123,13 +123,13 @@
 					<option value="Yogyakarta">Yogyakarta</option>
 				</select>
 				<p align="left" style="margin-top:70px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">City</p>
-				<input type="text" id="txtCity" name="city" value=""><br>
+				<input type="text" id="txtCity" name="city" value="Surabaya"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Districts</p>
-				<input type="text" id="txtKecamatan" name="Kecamatan" value=""><br>
+				<input type="text" id="txtKecamatan" name="Kecamatan" value="Gubeng"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Postal Code</p>
-				<input type="text" id="txtPostalCode" name="postalCode" value=""><br>
+				<input type="text" id="txtPostalCode" name="postalCode" value="64862"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Phone Number</p>
-				<input type="text" id="txtPhone" name="phone" value=""><br>
+				<input type="text" id="txtPhone" name="phone" value="085001001001"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Guests</p>
 				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
 					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
@@ -151,23 +151,25 @@
 				<p align="left" style="margin-top:60px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Bathrooms</p>
 				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
 					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
-					<input type="text" id="txtNumberBeds" name="numberBeds" value="1" style="width:60%;float:left;position:relative">
+					<input type="text" id="txtNumberBaths" name="numberBaths" value="1" style="width:60%;float:left;position:relative">
 					<div id="plusButton" style="width:2em;height:2em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
 				</div>
 				<p align="left" style="margin-top:60px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">About this House</p>
-				<textarea id="txtAbout" name="aboutHouse" placeholder="Write your description..." style="width:90%;height:100px;position:absolute;left:0px;margin-left:20px;padding:10px 10px 10px 10px;"></textarea><br>
+				<textarea id="txtAbout" name="aboutHouse" placeholder="Write your description..." style="width:90%;height:100px;position:absolute;left:0px;margin-left:20px;padding:10px 10px 10px 10px;">Huallala</textarea><br>
 				<p align="left" style="margin-top:90px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Price per Night (IDR)</p>
 				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
 					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
-					<input type="text" id="txtPrice" name="Price" value="100000" style="width:60%;float:left;position:relative">
+					<input type="text" id="txtPrice" name="Price" value="200000" style="width:60%;float:left;position:relative">
 					<div id="plusButton" style="width:2em;height:2em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
 				</div>
 				<p align="left" style="margin-top:70px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Photos</p>
-				<input type="file" name="txtPhone" value="" style="width:90%;height:100px;position:absolute;left:0px;margin-left:20px;"><br>
+				<div class="daftarPhoto" style="width:175px;height:100px;margin-left:20px;margin-bottom:10px;"><img src='img/home.jpg' style="width:100%;height:100%;"></div><!--gae foto!-->
+				<input type="file" id="fileUploadHome" name="uploadHome" value="" style="width:90%;height:100px;position:absolute;left:0px;margin-left:20px;"><br>
 		</div>
 		
 		<footer style="text-align:right;padding-right:20px;">
-				<input type="button" name="btnHosting" value="Host" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
+				<input type="button" name="btnUpdate" value="Update" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
+				<input type="button" name="btnDelete" value="Delete" style="width:30%;height:60%;background-color:white;border-radius:10px;font-size:1.5em;color:#f94d6e;top:20%;position:relative;">
 			</form>
 		</footer>
   </ons-page>
