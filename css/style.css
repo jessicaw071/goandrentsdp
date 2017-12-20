@@ -177,7 +177,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', end
 	display:inline;
 
 }
-.contProfile input[type="text"], .contProfile input[type="password"], .contProfile input[type="date"], .contProfile select{
+
+.contProfile input[type="text"], .contProfile input[type="password"], .contProfile input[type="date"],.contProfile input[type="email"],.contProfile select{
 	font-family: HNLight;
 	font-size: 1em;
 	width:90%;
@@ -191,7 +192,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', end
 	margin-left:20px;
 	left:0px;
 }
-.cFormLogin input[type="text"], .cFormLogin input[type="password"], .cFormLogin input[type="date"], .cFormLogin select{
+.cFormLogin input[type="text"], .cFormLogin input[type="password"], .cFormLogin input[type="date"], .cFormLogin input[type="email"], .cFormLogin select{
 	font-family: HNLight;
 	font-size: 1em;
 	width: 18em;
