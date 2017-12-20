@@ -163,7 +163,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', end
 
 }
 
-.contProfile input[type="text"], .contProfile input[type="password"], .contProfile input[type="date"], .contProfile select{
+.contProfile input[type="text"], .contProfile input[type="password"], .contProfile input[type="date"], .contProfile input[type="email"],.contProfile select{
 	font-family: HNLight;
 	font-size: 1em;
 	width:90%;
