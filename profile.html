@@ -145,44 +145,28 @@
         });
     };
     function onBackKeyDown(){
-      makeNotification();
-      $.post(server, {'chat': chat, 'nama': nama, 'tipe': 2});
-
-      var x = confirm("Are you sure ?");
+      window.location="index.html";
       window.plugins.googleplus.disconnect(
         function (msg) {
-          alert("Berhasil Logout Google"); // do something useful instead of alerting
+          //alert("Berhasil Logout Google"); // do something useful instead of alerting
         },function (msg) {
-          alert("Gagal Logout Google"); // do something useful instead of alerting
-          x=false;
-          alert(msg);
+          //alert("Gagal Logout Google"); // do something useful instead of alerting
+          //alert(msg);
 
         }
       );
       facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
-        alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+        //alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
       }, function (msg) {
-        alert("Gagal Logout Facebook"); // do something useful instead of alerting
-        x=false;
-        alert(msg);
+        //alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        //alert(msg);
       });
       facebookConnectPlugin.logout(function (msg) {
-        alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+        //alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
       }, function (msg) {
-        alert("Gagal Logout Facebook"); // do something useful instead of alerting
-        x=false;
-        alert(msg);
+        //alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        //alert(msg);
       });
-
-      if(x){
-        if (navigator.app) {
-            navigator.app.exitApp();
-        } else if (navigator.device) {
-            navigator.device.exitApp();
-        } else {
-            window.close();
-        }
-      }
     }
   app.initialize();
 

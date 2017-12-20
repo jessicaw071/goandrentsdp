@@ -389,46 +389,30 @@
     }*/
 
 
-  function onBackKeyDown(){
-    makeNotification();
-    $.post(server, {'chat': chat, 'nama': nama, 'tipe': 2});
+    function onBackKeyDown(){
+      window.location="index.html";
+      window.plugins.googleplus.disconnect(
+        function (msg) {
+          //alert("Berhasil Logout Google"); // do something useful instead of alerting
+        },function (msg) {
+          //alert("Gagal Logout Google"); // do something useful instead of alerting
+          //alert(msg);
 
-    var x = confirm("Are you sure ?");
-    window.plugins.googleplus.disconnect(
-      function (msg) {
-        alert("Berhasil Logout Google"); // do something useful instead of alerting
-      },function (msg) {
-        alert("Gagal Logout Google"); // do something useful instead of alerting
-        x=false;
-        alert(msg);
-
-      }
-    );
-    facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
-      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-    }, function (msg) {
-      alert("Gagal Logout Facebook"); // do something useful instead of alerting
-      x=false;
-      alert(msg);
-    });
-    facebookConnectPlugin.logout(function (msg) {
-      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-    }, function (msg) {
-      alert("Gagal Logout Facebook"); // do something useful instead of alerting
-      x=false;
-      alert(msg);
-    });
-
-    if(x){
-      if (navigator.app) {
-          navigator.app.exitApp();
-      } else if (navigator.device) {
-          navigator.device.exitApp();
-      } else {
-          window.close();
-      }
+        }
+      );
+      facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
+        //alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+      }, function (msg) {
+        //alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        //alert(msg);
+      });
+      facebookConnectPlugin.logout(function (msg) {
+        //alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+      }, function (msg) {
+        //alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        //alert(msg);
+      });
     }
-  }
   window.fn = {};
     window.fn.open = function() {
         let menu = document.getElementById('menu');

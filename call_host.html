@@ -14,16 +14,16 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>		
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js"></script>
-		
+
 		<link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css">
 		<link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.min.css">
-		
+
 		<script>
 			$(function() {
 				$("#banner > div:gt(0)").hide();
@@ -37,14 +37,14 @@
 				},  3000);
 			});
 		</script>
-		
+
 		<style>
 		  .carousel-inner > .item > img,
 		  .carousel-inner > .item > a > img{
 			  width: 100%;
 			  margin: auto;
 		  }
-	  </style>	
+	  </style>
 	</head>
 
 	<body>
@@ -77,13 +77,13 @@
           Go & Rent
         </div>
         </ons-toolbar>
-		
+
 		<div class="contProfile" style="width:100%;height:100%;margin-top:-20px;background-image:url(img/call.jpg);background-size:cover;repeat:no-repeat;">
 			<form method='post' class="editProf" align="left">
 				<input type="text" id="txtPhoneNumber" name="phoneHost" value="085102100000" style="width:40%;height:40px;border-radius:10px;font-size:1.3em;position:absolute;top:60%;left:10%;color:#f94d6e;text-align:center;" readonly>
 			</form>
 		</div>
-		
+
 		<footer>
 			<div class="price" style="text-align:left;margin-top:10px;margin-left:10px;font-size:1.5em;font-weight:bold;float:left">Rp. 10.250.000,00</div><div style="float:left;text-align:left;font-size:1em;margin-top:15px;margin-left:5px;">per night</div>
 			<div class="captReview" style="font-size:1em;margin-left:10px;clear:both;position:absolute;bottom:10px;">Rates 4 of 5</div>
@@ -126,6 +126,30 @@
           // navigator.vibrate([300, 10, 150, 10, 150]);
       });
       $(document).ready(onDeviceReady());
+      function onBackKeyDown(){
+        window.location="index.html";
+        window.plugins.googleplus.disconnect(
+          function (msg) {
+            //alert("Berhasil Logout Google"); // do something useful instead of alerting
+          },function (msg) {
+            //alert("Gagal Logout Google"); // do something useful instead of alerting
+            //alert(msg);
+
+          }
+        );
+        facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
+          //alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+        }, function (msg) {
+          //alert("Gagal Logout Facebook"); // do something useful instead of alerting
+          //alert(msg);
+        });
+        facebookConnectPlugin.logout(function (msg) {
+          //alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+        }, function (msg) {
+          //alert("Gagal Logout Facebook"); // do something useful instead of alerting
+          //alert(msg);
+        });
+      }
     function onDeviceReady(){
       //getIp();
       $.post(server, {'user': localStorage.getItem("storageName"), 'tipe': 3},function(data){
