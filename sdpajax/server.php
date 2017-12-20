@@ -38,11 +38,37 @@
 		}else if($_POST['tipe'] == 'updateTitleRumah') {
 			$query = "UPDATE rumahs SET title_rumah = '".$_POST['title']."' WHERE id_rumah = '".$_POST['id']."'";
 			$link->query($query);
+		}else if($_POST['tipe'] == 'updateHeart') {
+
+			$query = "SELECT * FROM favorites";
+			$res = $link->query($query);
+			$idnya = 0;
+			$ketemu = false;
+			while($row = $res->fetch_object()){
+        	if($row->id_rumah == $_POST['id_rumah'] && $row->id_user == $_POST['userskr']){
+						$ketemu = true;
+						$idnya = $row->id_favorite;
+						break;
+					}
+    	}
+			if($ketemu){
+				$query = "DELETE FROM favorites WHERE id_favorite = $idnya";
+				$link->query($query);
+				echo "b";
+			}else{
+				$query = "INSERT INTO favorites VALUES(NULL,'".$_POST['userskr']."','".$_POST['id_rumah']."',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
+				$link->query($query);
+				echo "a";
+			}
+
 		}else if($_POST['tipe'] == 'ambilSemuaRumah') {
 			$query = "SELECT * FROM rumahs";
 			$res = $link->query($query);
 			$data = array();
 			while($row = $res->fetch_object()){
+				$query2 = "SELECT COUNT(*) as ada FROM favorites WHERE id_user = '".$_POST['userskr']."' AND id_rumah = '".$row->id_rumah."'";
+				$res2 = $link->query($query2);
+				$row->adaheart = $res2->fetch_object();
               $data[] = $row;
           	}
 			echo json_encode($data);
@@ -51,6 +77,9 @@
 			$res = $link->query($query);
 			$data = array();
 			while($row = $res->fetch_object()){
+				$query2 = "SELECT COUNT(*) as ada FROM favorites WHERE id_user = '".$_POST['userskr']."' AND id_rumah = '".$row->id_rumah."'";
+				$res2 = $link->query($query2);
+				$row->adaheart = $res2->fetch_object();
 				$pecah = explode(" ",$row->longlat_rumah);
 				$row->distance = distance($_POST['longkita'],$_POST['latkita'],$pecah[0],$pecah[1],"K");
 				$data[] = $row;
@@ -61,6 +90,9 @@
 			$res = $link->query($query);
 			$data = array();
 			while($row = $res->fetch_object()){
+				$query2 = "SELECT COUNT(*) as ada FROM favorites WHERE id_user = '".$_POST['userskr']."' AND id_rumah = '".$row->id_rumah."'";
+				$res2 = $link->query($query2);
+				$row->adaheart = $res2->fetch_object();
 				$pecah = explode(" ",$row->longlat_rumah);
 				$row->distance = distance($_POST['longkita'],$_POST['latkita'],$pecah[0],$pecah[1],"K");
 				$data[] = $row;
