@@ -8,43 +8,20 @@
   <script type="text/javascript" src="cordova.js"></script>
   <!--<script type="text/javascript" src="js/index.js"></script>-->
   <script src="node_modules/onsenui/js/onsenui.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
 	<meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js"></script>
+    <link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.min.css">
 
-		<link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css">
-		<link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.min.css">
-
-		<script>
-			$(function() {
-				$("#banner > div:gt(0)").hide();
-				setInterval(function() {
-				  $('#banner > div:first')
-					.fadeOut(1000)
-					.next()
-					.fadeIn(1000)
-					.end()
-					.appendTo('#banner');
-				},  3000);
-			});
-		</script>
-
-		<style>
-		  .carousel-inner > .item > img,
-		  .carousel-inner > .item > a > img{
-			  width: 100%;
-			  margin: auto;
-		  }
-	  </style>
 	</head>
 
 	<body>
@@ -53,7 +30,7 @@
       <ons-splitter-side id="menu" side="left" width="220px" swipe-target-width="125px" collapse swipeable >
         <ons-page>
           <ons-list id="chatMember">
-            <ons-list-header><img src='logo.png' width='70%'></ons-list-header>
+            <ons-list-header><img src='logo.png' width='70%'>Menu</ons-list-header>
             <a href="next.html" style="text-decoration:none;"><ons-list-item class="mentionBtn" tappable>Home</ons-list-item></a>
             <a href="about.html" style="text-decoration:none;"><ons-list-item class="mentionBtn" tappable>About</ons-list-item></a>
             <a href="profile.html" style="text-decoration:none;"><ons-list-item class="mentionBtn" tappable>Profile</ons-list-item></a>
@@ -78,24 +55,68 @@
         </div>
         </ons-toolbar>
 
-		<div class="contProfile" style="width:100%;height:100%;margin-top:-20px;background-image:url(img/host.jpg);background-size:cover;repeat:no-repeat;">
-			<form method='post' class="editProf" align="left">
-				<a href="host.html" style="text-decoration:none"><input type="button" name="btnStart" value="Get Started" style="width:auto;height:40px;background-color:#f94d6e;border-radius:10px;font-size:1.3em;color:white;position:absolute;bottom:80px;right:20px;"></a>
-			</form>
+		<div class="center">
+    		<div class='cTitle'>
+				<div class='cFormDalam'>
+					<!--<h1><input type="text" id="timo" placeholder="Search"/></h1>-->
+				</div>
+      		</div>
+        </div>
+		<div style="width:100%;height:calc(100% - 50px);" >
+      <div  id="isifav">
+			<div class="horizontal-menu-fav" style="display:absolute;">
+				<div class="detailFavorite" style="display:inline-block;">
+					<div class="img-feature"><center><img src='img/home.jpg' style="width:100%;height:100%;"></center></div>
+					<div class="content">
+						<h5><b>Kebab Kings, Dhar...</b></h5>
+						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
+					</div>
+				</div>
+			</div>
+			<div class="horizontal-menu-fav" style="display:absolute;">
+				<div class="detailFavorite" style="display:inline-block;">
+					<div class="img-feature"><center><img src='img/home.jpg' style="width:100%;height:100%;"></center></div>
+					<div class="content">
+						<h5><b>Kebab Kings, Dhar...</b></h5>
+						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
+					</div>
+				</div>
+			</div>
+			<div class="horizontal-menu-fav" style="display:absolute;">
+				<div class="detailFavorite" style="display:inline-block;">
+					<div class="img-feature"><center><img src='img/home.jpg' style="width:100%;height:100%;"></center></div>
+					<div class="content">
+						<h5><b>Kebab Kings, Dhar...</b></h5>
+						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
+					</div>
+				</div>
+			</div>
+			<div class="horizontal-menu-fav" style="display:absolute;">
+				<div class="detailFavorite" style="display:inline-block;">
+					<div class="img-feature"><center><img src='img/home.jpg' style="width:100%;height:100%;"></center></div>
+					<div class="content">
+						<h5><b>Kebab Kings, Dhar...</b></h5>
+						<span style="font-size: 0.8em">12.00 - 22.00 &bull; 2.29 km</span>
+					</div>
+				</div>
+			</div>
+
+      </div>
+      <br><br>
 		</div>
 
-		<footer style="text-align:right;padding-right:20px;">
+       <footer>
 			<div class="" style="float:left;width:20%;">
-				<a href="next.html"><img src="img/explore.png" alt="" style="width:100%;height:100%;"></a>
+        <a href="next.html"><img src="img/explore.png" alt="" style="width:100%;height:100%;"></a>
 			</div>
 			<div class="" style="float:left;width:20%;">
-				<a href="favorite.html"><img src="img/favorite.png" alt="" style="width:100%;height:100%;"><br></a>
+				<a href="#"><img src="img/favorite_active.png" alt="" style="width:100%;height:100%;"><br></a>
 			</div>
 			<div class="" style="float:left;width:20%;">
 				<a href="history.html"><img src="img/history.png" alt="" style="width:100%;height:100%;"><br></a>
 			</div>
 			<div class="" style="float:left;width:20%;">
-				<a href="#"><img src="img/inbox_active.png" alt="" style="width:100%;height:100%;"><br></a>
+				<a href="becomehost.html"><img src="img/inbox.png" alt="" style="width:100%;height:100%;"><br></a>
 			</div>
 			<div class="" style="float:left;width:20%;">
 				<a href="profile.html"><img src="img/profile.png" alt="" style="width:100%;height:100%;"><br></a>
@@ -134,12 +155,13 @@
       }
     function onDeviceReady(){
       ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
-      ini2 = localStorage.getItem("tipeName");
+      ini2 = localStorage.getItem("searchName") != null ? localStorage.getItem("searchName") : "" ;
       navigator.geolocation.getCurrentPosition(onSuccess, onError);
-      $.post(server, {'userskr' : ini ,'longkita' : longkita , 'latkita': latkita,'tipe': "ambilSudahHost"},function(data){
-        //data = JSON.parse(data);
-        if(data>0){
-          window.location="list_home.html";
+      $.post(server, {'userskr' : ini ,'kata' : ini2,'longkita' : longkita , 'latkita': latkita,'tipe': "selectSearch"},function(data){
+        data = JSON.parse(data);
+          $("#isifav").html("");
+        for(var i= 0;i<data.length;i++){
+          $("#isifav").html($("#isifav").html()+'<div class="horizontal-menu-fav" onclick="pindahDetail(\''+data[i].id_rumah+'\')" style="display:absolute;"><div class="detailFavorite" style="display:inline-block;"><div class="img-feature"><center><img src="'+data[i].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><h5><b>'+data[i].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[i].kapasitas+' Orang &bull; '+(Math.floor(data[i].distance*1000)/1000)+' km</span></div></div></div>');
         }
       });
     };

@@ -149,7 +149,7 @@
     function onDeviceReady(){
       ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
       navigator.geolocation.getCurrentPosition(onSuccess, onError);
-      $.post(server, {'userskr' : ini ,'longkita' : longkita , 'latkita': latkita,'tipe': "selectFavorite"},function(data){
+      $.post(server, {'userskr' : ini ,'longkita' : longkita , 'latkita': latkita,'tipe': "selectHostinganRumah"},function(data){
         data = JSON.parse(data);
           $("#isifav").html("");
         for(var i= 0;i<data.length;i++){

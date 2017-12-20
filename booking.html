@@ -94,9 +94,9 @@
 				<input type="date" id="dateCO" name="dateCheckIn" min="" value="" disabled><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Guests</p>
 				<div id="guest" style="width:auto height:auto; margin-left:20px;position:absolute">
-					<div id="plusButton" style="width:2em;height:2em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+					<div id="plusButton" onclick="gantiangka('minus')" style="width:1.7em;height:1.7em;position:relative;border-radius:50px;margin-top:5px;background-image:url(img/min.png);background-size:cover;repeat:no-repeat;float:left;"></div>
 					<input type="text" name="numberGuest" id="txtNumberGuests" value="1" style="width:60%;float:left;position:relative">
-					<div id="plusButton" style="width:2em;height:2em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
+					<div id="plusButton" onclick="gantiangka('plus')" style="width:1.7em;height:1.7em;position:relative;margin-left:20px;margin-top:5px;border-radius:50px;background-image:url(img/add.png);background-size:cover;repeat:no-repeat;float:left;"></div>
 				</div>
 				<p align="left" style="margin-top:60px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Location Detail</p>
 				<p id="locationDetail" align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.3em;font-weight:none;position:relative;color:gray;">Ngagel Jaya Tengah No. 70-73, Kecamatan Gubeng, Surabaya, Jawa Timur</p>
@@ -109,125 +109,88 @@
 		</div>
 
 		<footer style="text-align:right;padding-right:20px;">
-				<input type="button" name="btnBooking" value="Book" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
+				<input type="button" name="btnBooking" onclick="insertBook()" value="Book" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
 			</form>
 		</footer>
   </ons-page>
   </template>
 	</body>
   <script type="text/javascript">
-  var server = "http://workastation.hol.es/sdpajax/server.php";
-  function getIp() {
-      ons.notification.prompt({message: 'Masukkan ip server'}).then(function(answer) {
-          if(answer.trim() == '')
-              getIp();
-          else {
-              server += answer;
-              server += '/sdpajax/server.php';
-          }
-      });
+  var server = "http://192.168.1.3/sdpajax/server.php";
+  var ini,ini2;
+  var latkita=0,longkita=0;
+  var max=100;
+  var hargatotal = 0;
+  function insertBook(){
+    $.post(server, {'idbook':ini+ini2 , 'checkin' : $("#dateCI").val() , 'checkout' : $("#dateCO").val(), 'guest' : $("#txtNumberGuests").val() , 'ktp' : $("#txtID").val() ,'total' : hargatotal, 'userskr' : ini , 'idrumah' : ini2 ,'tipe': "insertBook"},function(data){
+      alert("Terima Kasih Atas Booking Anda!");
+      window.location="next.html";
+    });
+  }
+  function gantiangka(id){
+    var isinya = parseInt($("#txtNumberGuests").val());
+    if(id=='minus'){
+      if (isinya-1>0) {
+        isinya--;
+        $("#txtNumberGuests").val(isinya);
+      }
+    }else{
+      if (isinya+1<max) {
+        isinya++;
+        $("#txtNumberGuests").val(isinya);
+      }
+    }
   }
     document.addEventListener("deviceready", onDeviceReady, false);
-    ons.ready(function() {
-          /*getIp();
-          $.post(server, {'user': 'timo', 'tipe': 2},function(data){
-            cordova.plugins.notification.local.schedule({
-                id: 10,
-                title: "Berhasil Login",
-                text: "Halo "+data['nama']+"!"
-            });
-          });
+    var onSuccess = function(position) {
+          /*alert('Latitude: '          + position.coords.latitude          + '\n' +
+                'Longitude: '         + position.coords.longitude         + '\n' +
+                'Altitude: '          + position.coords.altitude          + '\n' +
+                'Accuracy: '          + position.coords.accuracy          + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                'Heading: '           + position.coords.heading           + '\n' +
+                'Speed: '             + position.coords.speed             + '\n' +
+                'Timestamp: '         + position.timestamp                + '\n');*/
+          latkita = position.coords.latitude;
+          longkita = position.coords.longitude;
+      };
 
-          // makeNotification(0, 'ini title', 'ini isi dari text');
-          /*cordova.plugins.notification.local.on("click", function(notification) {
-              cordova.plugins.notification.local.clearAll();
-          });*/
-
-
-          // navigator.vibrate([300, 10, 150, 10, 150]);
-      });
-      $(document).ready(onDeviceReady());
+      // onError Callback receives a PositionError object
+      //
+      function onError(error) {
+          alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
+      }
+      function pindahDetail(id){
+        localStorage.setItem("detailID",id);
+        window.location = "detail.html";
+      }
+      const numberWithCommas = (x) => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
     function onDeviceReady(){
-      //getIp();
-      $.post(server, {'user': localStorage.getItem("storageName"), 'tipe': 3},function(data){
+      ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
+      ini2 = localStorage.getItem("detailID") != null ? localStorage.getItem("detailID") : "gdaniel";
+      $("#dateCI").val(localStorage.getItem("checkin"));
+      $("#dateCO").val(localStorage.getItem("checkout"));
+      var date1 = new Date($("#dateCI").val());
+      var date2 = new Date($("#dateCO").val());
+      var selisih = 1;
+      selisih = ((date2 - date1)/3600/24/1000);
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+      $.post(server, {'id': ini2,'tipe': "ambilDetail"},function(data){
         data = JSON.parse(data);
-        cordova.plugins.notification.local.schedule({
-            id: 5,
-            title: "Berhasil Login",
-            text: "Halo "+data['name']+"!"
-        });
+        console.log(data);
+        max = parseInt(data.kapasitas);
+        $("#locationDetail").html(data.alamat_rumah);
+        $("#subTotal").html("Rp. "+numberWithCommas(parseInt(data.harga)*selisih));
+        $("#serviceFee").html("Rp. "+numberWithCommas(parseInt(data.harga/10)*selisih));
+        $("#grandTotal").html("Rp. "+numberWithCommas((parseInt(data.harga)+parseInt(data.harga/10))*selisih));
+        hargatotal = (parseInt(data.harga)+parseInt(data.harga/10))*selisih;
       });
-
     };
-  function myfunc(){
-    window.plugins.googleplus.login({},function (obj) {
-      alert(JSON.stringify(obj)); // do something useful instead of alerting
-    },
-    function (msg) {
-      alert('error: ' + msg);
-    });
-  };
-  function myfuncfb(){
-    var fbLoginSuccess = function(result){
-    //calling api after login success
-    facebookConnectPlugin.api("/me?fields=email,name,birthday",['email','user_birthday','public_profile'],function(userData){
-    //API success callback
-      alert("User Info : "+userData.email+"\n Hello ! Our Beloved : "+userData.name +"\n We Want to Remind You that your Birthday is : "+userData.birthday);
-      },function(error){
-    //API error callback
-      alert(JSON.stringify(error));
-      });
-    }
-    //alert("user Info : "+userData.name+" Hello "+userData.email);
-    //document.getElementById("cobaAjax").innerHTML=JSON.stringify(userData);
-    //alert("UserInfo: "+userData['email'] + "\n Hello "+userData['name']+" Good to see you");
-    //};
-    facebookConnectPlugin.login(['email','user_birthday','public_profile'], fbLoginSuccess,
-    function loginError (error) {
-    alert(JSON.stringify(error));
-  });
-  };
-  function onBackKeyDown(){
-    makeNotification();
-    $.post(server, {'chat': chat, 'nama': nama, 'tipe': 2});
-
-    var x = confirm("Are you sure ?");
-    window.plugins.googleplus.disconnect(
-      function (msg) {
-        alert("Berhasil Logout Google"); // do something useful instead of alerting
-      },function (msg) {
-        alert("Gagal Logout Google"); // do something useful instead of alerting
-        x=false;
-        alert(msg);
-
-      }
-    );
-    facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
-      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-    }, function (msg) {
-      alert("Gagal Logout Facebook"); // do something useful instead of alerting
-      x=false;
-      alert(msg);
-    });
-    facebookConnectPlugin.logout(function (msg) {
-      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-    }, function (msg) {
-      alert("Gagal Logout Facebook"); // do something useful instead of alerting
-      x=false;
-      alert(msg);
-    });
-
-    if(x){
-      if (navigator.app) {
-          navigator.app.exitApp();
-      } else if (navigator.device) {
-          navigator.device.exitApp();
-      } else {
-          window.close();
-      }
-    }
-  }
-  window.fn = {};
+    $(document).ready(onDeviceReady);
+    window.fn = {};
     window.fn.open = function() {
         let menu = document.getElementById('menu');
         menu.open();
@@ -244,7 +207,30 @@
             text: "Hai Hai Timo"
         });
     };
+    function onBackKeyDown(){
+      window.location="index.html";
+      window.plugins.googleplus.disconnect(
+        function (msg) {
+          //alert("Berhasil Logout Google"); // do something useful instead of alerting
+        },function (msg) {
+          //alert("Gagal Logout Google"); // do something useful instead of alerting
+          //alert(msg);
 
+        }
+      );
+      facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
+        //alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+      }, function (msg) {
+        //alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        //alert(msg);
+      });
+      facebookConnectPlugin.logout(function (msg) {
+        //alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
+      }, function (msg) {
+        //alert("Gagal Logout Facebook"); // do something useful instead of alerting
+        //alert(msg);
+      });
+    }
   app.initialize();
 
   </script>

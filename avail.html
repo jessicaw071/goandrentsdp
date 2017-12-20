@@ -81,13 +81,13 @@
 		<div class="contProfile" style="width:100%;height:auto;margin-bottom:100px;">
 			<form method='post' class="editProf" align="left">
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Check In</p>
-				<input type="date" id="dateCI" name="dateCheckIn" min="" value=""><br>
+				<input type="date" id="dateCI" name="dateCheckIn"/><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Check Out</p>
-				<input type="date" id="dateCO" name="dateCheckIn" min="" value=""><br>
+				<input type="date" id="dateCO" name="dateCheckIn" /><br>
 		</div>
 
 		<footer style="text-align:right;padding-right:20px;">
-				<input type="button" id="btnCheck" name="btnCheck" value="Check" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
+				<input type="button" id="btnCheck" name="btnCheck" onclick="checkBisa();" value="Check" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
 				<input type="hidden" id="btnNext" name="btnNext" value="Next" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
 			</form>
 		</footer>
@@ -95,80 +95,36 @@
   </template>
 	</body>
   <script type="text/javascript">
-  var server = "http://workastation.hol.es/sdpajax/server.php";
-  function getIp() {
-      ons.notification.prompt({message: 'Masukkan ip server'}).then(function(answer) {
-          if(answer.trim() == '')
-              getIp();
-          else {
-              server += answer;
-              server += '/sdpajax/server.php';
-          }
-      });
-  }
-    document.addEventListener("deviceready", onDeviceReady, false);
-    ons.ready(function() {
-          /*getIp();
-          $.post(server, {'user': 'timo', 'tipe': 2},function(data){
-            cordova.plugins.notification.local.schedule({
-                id: 10,
-                title: "Berhasil Login",
-                text: "Halo "+data['nama']+"!"
-            });
-          });
-
-          // makeNotification(0, 'ini title', 'ini isi dari text');
-          /*cordova.plugins.notification.local.on("click", function(notification) {
-              cordova.plugins.notification.local.clearAll();
-          });*/
-
-
-          // navigator.vibrate([300, 10, 150, 10, 150]);
-      });
-      $(document).ready(onDeviceReady());
-    function onDeviceReady(){
-      //getIp();
-	  document.getElementById('dateCI').value = new Date().toDateInputValue();
-	  document.getElementById('dateCO').value = new Date().toDateInputValue();
-      $.post(server, {'user': localStorage.getItem("storageName"), 'tipe': 3},function(data){
-        data = JSON.parse(data);
-        cordova.plugins.notification.local.schedule({
-            id: 5,
-            title: "Berhasil Login",
-            text: "Halo "+data['name']+"!"
-        });
-      });
-    };
-  function myfunc(){
-    window.plugins.googleplus.login({},function (obj) {
-      alert(JSON.stringify(obj)); // do something useful instead of alerting
-    },
-    function (msg) {
-      alert('error: ' + msg);
+  var ini,ini2;
+  function checkBisa(){
+    var a = $("#dateCI").val();
+    var b = $("#dateCO").val();
+    $.post(server,{'tglawal' : a, 'tglakhir' : b ,'rumah' : ini2, 'tipe' : 'ambilAdaBooking'},function(data){
+      if(parseInt(data)>0){
+        alert("Pada Tanggal Segitu Sedang Dibooking");
+      }else{
+        alert("Bisa Dibooking");
+       localStorage.setItem("checkin",a);
+      localStorage.setItem("checkout",b);
+        window.location = "booking.html";
+      }
     });
-  };
-  function myfuncfb(){
-    var fbLoginSuccess = function(result){
-    //calling api after login success
-    facebookConnectPlugin.api("/me?fields=email,name,birthday",['email','user_birthday','public_profile'],function(userData){
-    //API success callback
-      alert("User Info : "+userData.email+"\n Hello ! Our Beloved : "+userData.name +"\n We Want to Remind You that your Birthday is : "+userData.birthday);
-      },function(error){
-    //API error callback
-      alert(JSON.stringify(error));
-      });
-    }
-    //alert("user Info : "+userData.name+" Hello "+userData.email);
-    //document.getElementById("cobaAjax").innerHTML=JSON.stringify(userData);
-    //alert("UserInfo: "+userData['email'] + "\n Hello "+userData['name']+" Good to see you");
-    //};
-    facebookConnectPlugin.login(['email','user_birthday','public_profile'], fbLoginSuccess,
-    function loginError (error) {
-    alert(JSON.stringify(error));
-  });
-  };
+  }
+  var server = "http://192.168.1.3/sdpajax/server.php";
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady(){
+      ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
+      ini2 = localStorage.getItem("detailID") != null ? localStorage.getItem("detailID") : "gdaniel";
+      //getIp();
+      //var dateControl = new Date().getFullYear()+"-"+new Date().getMonth()+"-"+new Date().getDate();
+      //$("#dateCI").val("2017-02-02");
+	  //document.getElementById('dateCI').setAttribute("min",dateControl);
+	  //document.getElementById('dateCO').value = new Date().getFullYear()+"-"+new Date().getMonth()+"-"+new Date().getDate();
+
+    };
+
+      $(document).ready(onDeviceReady);
   function onBackKeyDown(){
-    makeNotification();
     $.post(server, {'chat': chat, 'nama': nama, 'tipe': 2});
 
     var x = confirm("Are you sure ?");
@@ -196,16 +152,6 @@
       x=false;
       alert(msg);
     });
-
-    if(x){
-      if (navigator.app) {
-          navigator.app.exitApp();
-      } else if (navigator.device) {
-          navigator.device.exitApp();
-      } else {
-          window.close();
-      }
-    }
   }
   window.fn = {};
     window.fn.open = function() {

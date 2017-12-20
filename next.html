@@ -59,7 +59,7 @@
     		<div class='cTitle'>
 				<img src='logo.png' width='70%'>
         			<div class='cFormDalam'>
-						<h1><input type="text" id="timoText" placeholder="Search"/><button id="b1">Search</button></h1>
+						<h1><input type="text" id="timoText" placeholder="Search"/><button id="b1" onclick="pindahSearch();">Search</button></h1>
 					</div>
       		</div>
         </div>
@@ -208,6 +208,10 @@
         num = num * -1;
     }
     return num;
+  }
+  function pindahSearch(){
+      localStorage.setItem("searchName",$("#timoText"));
+      window.location = "hasilsearch.html";
   }
   // LATITUDE -90 to +90
   function generateRandomLat() {
