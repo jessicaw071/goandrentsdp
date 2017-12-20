@@ -8,6 +8,7 @@
   <script type="text/javascript" src="cordova.js"></script>
   <!--<script type="text/javascript" src="js/index.js"></script>-->
   <script src="node_modules/onsenui/js/onsenui.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
 	<meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -57,12 +58,12 @@
 		<div class="center">
     		<div class='cTitle'>
 				<div class='cFormDalam'>
-					<h1><input type="text" id="timo" placeholder="Search"/></h1>
+					<!--<h1><input type="text" id="timo" placeholder="Search"/></h1>-->
 				</div>
       		</div>
         </div>
-
-		<div style="width:100%;height:calc(100% - 50px);">
+		<div style="width:100%;height:calc(100% - 50px);" >
+      <div  id="isifav">
 			<div class="horizontal-menu-fav" style="display:absolute;">
 				<div class="detailFavorite" style="display:inline-block;">
 					<div class="img-feature"><center><img src='img/home.jpg' style="width:100%;height:100%;"></center></div>
@@ -99,6 +100,9 @@
 					</div>
 				</div>
 			</div>
+
+      </div>
+      <br><br>
 		</div>
 
        <footer>
@@ -123,11 +127,40 @@
 	</body>
   <script type="text/javascript">
   var server = "http://192.168.1.3/sdpajax/server.php";
+  var ini ;
+  var latkita=0,longkita=0;
     document.addEventListener("deviceready", onDeviceReady, false);
-    $(document).ready(onDeviceReady());
-    function onDeviceReady(){
+    var onSuccess = function(position) {
+          /*alert('Latitude: '          + position.coords.latitude          + '\n' +
+                'Longitude: '         + position.coords.longitude         + '\n' +
+                'Altitude: '          + position.coords.altitude          + '\n' +
+                'Accuracy: '          + position.coords.accuracy          + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                'Heading: '           + position.coords.heading           + '\n' +
+                'Speed: '             + position.coords.speed             + '\n' +
+                'Timestamp: '         + position.timestamp                + '\n');*/
+          latkita = position.coords.latitude;
+          longkita = position.coords.longitude;
+      };
 
+      // onError Callback receives a PositionError object
+      //
+      function onError(error) {
+          alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
+      }
+    function onDeviceReady(){
+      ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+      $.post(server, {'userskr' : ini ,'longkita' : longkita , 'latkita': latkita,'tipe': "selectFavorite"},function(data){
+        data = JSON.parse(data);
+          $("#isifav").html("");
+        for(var i= 0;i<data.length;i++){
+          $("#isifav").html($("#isifav").html()+'<div class="horizontal-menu-fav" style="display:absolute;"><div class="detailFavorite" style="display:inline-block;"><div class="img-feature"><center><img src="'+data[i].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><h5><b>'+data[i].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[i].kapasitas+' Orang &bull; '+(Math.floor(data[i].distance*1000)/1000)+' km</span></div></div></div>');
+        }
+      });
     };
+    $(document).ready(onDeviceReady);
   window.fn = {};
     window.fn.open = function() {
         let menu = document.getElementById('menu');
