@@ -20,7 +20,7 @@
 	</head>
 
 	<body class="bodylogin">
-		<div id='iCont' style="position:absolute;height:50%;margin-top:30%;">
+		<div id='iCont' style="position:absolute;height:50%;margin-top:2%;">
 			<div class='cTitleLogin'  style='font-family: HNLight; color:white;'>
 				<img src='logo.png' width='70%'>
         <br>
@@ -31,11 +31,19 @@
 			<div class='cFormLogin'>
 				<form method='post'>
 						<center class="centerlogin">
-            <input type="email" placeholder="Email" name="user" id="txtUser">
+            <input type="email" placeholder="Email" name="Email" id="txtEmail">
+						<br>
+            <input type="text" placeholder="Username" name="user" id="txtUser">
 						<br>
 						<input type="password" placeholder="Password" name="pass" id="txtPass">
 						<br>
+            <input type="password" placeholder="Confirm Password" name="confpass" id="txtConfPass">
+						<br>
+            <input type="text" placeholder="Telephone" name="telp" id="txtTelp">
+						<br>
 						<input type="text" placeholder="Full Name" name="nama" id="txtNama">
+						<br>
+						<input type="text" placeholder="Address" name="alamat" id="txtAlamat">
 						<br>
 						<select name="comboGender" placeholder="Gender" id="cmbGender" >
 							<option value="-" selected disabled>Gender</option>
@@ -73,22 +81,32 @@
     var getInputPass = document.getElementById('txtPass').value;
     var getInputNama = document.getElementById('txtNama').value;
     var getInputGender = document.getElementById('cmbGender').value;
+    var getInputEmail = document.getElementById('txtEmail').value;
+    var getInputConfPass = document.getElementById('txtConfPass').value;
+    var getInputTelp = document.getElementById('txtTelp').value;
+    var getInputAlamat = document.getElementById('txtAlamat').value;
+    var getInputGender = document.getElementById('cmbGender').value;
     var getInputDoB = document.getElementById('datePick').value;
     var tahun = getInputDoB.split("-");
     tahun = parseInt(tahun[0]);
     var a = new Date();
     a = a.getFullYear();
-    if(a - tahun < 17) alert("You must reach 17 years old or older");
-      $.post(server, {'user': getInputUser ,'pass': getInputPass, 'nama': getInputNama, 'tipe': "ajaxRegister"},function(data){
-        if(data == "a"){
-          alert("Berhasil Register!");
-        }else if(data == "b"){
+    if(getInputPass != getInputConfPass){
+      alert("Password dan Confirm Password Harus sama!");
+    }else{
+      if(a - tahun < 17) alert("You must reach 17 years old or older"); else{
+        $.post(server, {'user': getInputUser ,'pass': getInputPass,'alamat': getInputAlamat, 'nama': getInputNama, 'gender': getInputGender, 'email': getInputEmail, 'telp' : getInputTelp, 'dob' : getInputDoB, 'tipe': "ajaxRegister"},function(data){
+          if(data == "a"){
+            alert("Berhasil Register!");
+          }else if(data == "b"){
 
-        }else{
-          alert(data);
-        }
-        window.location = "index.html";
-      });
+          }else{
+            alert(data);
+          }
+          window.location = "index.html";
+        });
+      }
+    }
   }
   app.initialize();
 /*

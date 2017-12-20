@@ -30,7 +30,7 @@
 			</div>
 			<div class='cFormLogin'>
 				<form method='post'>
-						<center class="centerlogin"><input type="email" placeholder="Email" name="user" id="txtUser">
+						<center class="centerlogin"><input type="text" placeholder="Username" name="user" id="txtUser">
 						<br>
 						<input type="password" placeholder="Password" name="pass" id="txtPass">
 						<br>
@@ -64,7 +64,7 @@
     }
   function myfunc(){
     window.plugins.googleplus.login({},function (obj) {
-      $.post(server, {'user': obj.email ,'pass': "google", 'nama': obj.displayName, 'tipe': "ajaxRegister"},function(data){
+      $.post(server, {'user': obj.email ,'email' : obj.email,'pass': "google", 'nama': obj.displayName, 'tipe': "ajaxRegister"},function(data){
         if(data == "a"){
 
         }else if(data == "b"){
@@ -86,7 +86,7 @@
     //calling api after login success
     facebookConnectPlugin.api("/me?fields=email,name,birthday",['email','user_birthday','public_profile'],function(userData){
     //API success callback
-    $.post(server, {'user': userData.email ,'pass': "google", 'nama': userData.name, 'tipe': "ajaxRegister"},function(data){
+    $.post(server, {'user': userData.email,'email' : userData.email ,'pass': "google", 'nama': userData.name, 'tipe': "ajaxRegister"},function(data){
       if(data == "a"){
 
       }else if(data == "b"){
@@ -123,8 +123,8 @@
       data = JSON.parse(data);
       var ketemu = false;
       for(var i = 0; i < data.length; i++){
-        if(data[i].email == getusername){
-          if(data[i].password == getpassword){
+        if(data[i].email_renter == getusername || data[i].id_renter == getusername){
+          if(data[i].pw_renter == getpassword){
             localStorage.setItem("storageName",getusername);
             alert("Berhasil Login");
             window.location = "next.html";
