@@ -14,16 +14,16 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>		
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js"></script>
-		
+
 		<link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css">
 		<link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.min.css">
-		
+
 		<script>
 			$(function() {
 				$("#banner > div:gt(0)").hide();
@@ -37,14 +37,14 @@
 				},  3000);
 			});
 		</script>
-		
+
 		<style>
 		  .carousel-inner > .item > img,
 		  .carousel-inner > .item > a > img{
 			  width: 100%;
 			  margin: auto;
 		  }
-	  </style>	
+	  </style>
 	</head>
 
 	<body>
@@ -77,12 +77,18 @@
           Go & Rent
         </div>
         </ons-toolbar>
-		
+
 		<div class="contProfile" style="width:100%;height:auto;margin-bottom:100px;">
-			<form method='post' class="editProf" align="left">			
-				<div class="fotoProfile" style="width:100px;height:100px;position:relative;margin:auto;margin-top:20px;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;margin-bottom:10px;"></div>
-				<p id="changePhoto" align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;color:#f94d6e" onclick="upload()">Change Photo</p>
-				<input type="file" name="profileUpload" id="UploadPhoto" style="display:none">
+				<!--<div class="fotoProfile" style="width:100px;height:100px;position:relative;margin:auto;margin-top:20px;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;margin-bottom:10px;"></div>
+        -->
+        <div align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;color:#f94d6e;border-radius:50px;">
+          <label for="file-input">
+              <div class="fotoProfile" style="width:100px;height:100px;position:relative;margin:auto;margin-top:20px;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;margin-bottom:10px;"></div>
+          </label>
+          <input id="file-input" name="gbrProfile" style="display:none;" type="file"/>
+        </div>
+        <p id="changePhoto" align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;color:#f94d6e">Change Photo</p>
+				<!--<input type="file" name="profileUpload" id="UploadPhoto" style="display:none">-->
 				<p align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;">Member since August 2017</p>
 				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;color:gray;">Full name</p>
 				<input type="text" id="txtName" name="fullname" value="Kenji Andrean"><br>
@@ -90,80 +96,52 @@
 				<input type="email" id="txtEmail" name="email" value="kenjiandrean@gmail.com"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Password</p>
 				<input type="password" id="txtPassword" name="password" value="1234asdf"><br>
-				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Gender</p>
+				<!--<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Gender</p>
 				<select id="comboGenderEditProf" name="cmbGender" placeholder="Gender" style="height:3em">
 					<option value="-" selected disabled>Gender</option>
 					<option value="Female">Female</option>
 					<option value="Male">Male</option>
 				</select><br>
+        <br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Date of Birth</p>
 				<input type="date" id="datepickerDoB" name="dateDoB" min="1980-01-01" value="1997-12-01"><br>
-				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Telephone</p>
+				--><p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Telephone</p>
 				<input type="text" placeholder="Telephone" name="telp" id="txtTelp"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Address</p>
-				<input type="text" id="txtAddress" name="address" value="Kenji Andrean"><br>
+				<input type="text" id="txtAddress" name="address" value="Kenji Andrean" placeholder="Alamat"><br>
 		</div>
-		
+
 		<footer style="text-align:right;padding-right:20px;">
 				<input type="button" name="btnBooking" value="Save" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
-			</form>
 		</footer>
   </ons-page>
   </template>
-	</body>	
-	
+	</body>
+
   <script type="text/javascript">
-	
+
 	function upload(){
 		$("#UploadPhoto").click();
 	}
-  
-  
-  var server = "http://workastation.hol.es/sdpajax/server.php";
-  function getIp() {
-      ons.notification.prompt({message: 'Masukkan ip server'}).then(function(answer) {
-          if(answer.trim() == '')
-              getIp();
-          else {
-              server += answer;
-              server += '/sdpajax/server.php';
-          }
-      });
-  }
+  var ini ;
+  var server = "http://192.168.1.3/sdpajax/server.php";
     document.addEventListener("deviceready", onDeviceReady, false);
-    ons.ready(function() {
-          /*getIp();
-          $.post(server, {'user': 'timo', 'tipe': 2},function(data){
-            cordova.plugins.notification.local.schedule({
-                id: 10,
-                title: "Berhasil Login",
-                text: "Halo "+data['nama']+"!"
-            });
-          });
-
-          // makeNotification(0, 'ini title', 'ini isi dari text');
-          /*cordova.plugins.notification.local.on("click", function(notification) {
-              cordova.plugins.notification.local.clearAll();
-          });*/
-
-
-          // navigator.vibrate([300, 10, 150, 10, 150]);
-      });
-      $(document).ready(onDeviceReady());
-	  
     function onDeviceReady(){
-      //getIp();		
-      $.post(server, {'user': localStorage.getItem("storageName"), 'tipe': 3},function(data){
+      ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
+      $.post(server, {'userskr' : ini ,'tipe': "selectEditProfile"},function(data){
         data = JSON.parse(data);
-        cordova.plugins.notification.local.schedule({
-            id: 5,
-            title: "Berhasil Login",
-            text: "Halo "+data['name']+"!"
-        });
+        console.log(data);
+        $("#txtName").val(data.nama_user);
+        $("#txtEmail").val(data.email_user);
+        $("#txtTelp").val(data.telp_user);
+        $("#txtAddress").val(data.alamat_user);
+        $("#txtPassword").val(data.pw_user);
+        $(".fotoProfile").css("background-image","url('"+data.picture_user+"')");
       });
-
     };
-  function myfunc(){
+
+      $(document).ready(onDeviceReady);
+  /*function myfunc(){
     window.plugins.googleplus.login({},function (obj) {
       alert(JSON.stringify(obj)); // do something useful instead of alerting
     },
@@ -248,7 +226,7 @@
             text: "Hai Hai Timo"
         });
     };
-
+*/
   app.initialize();
 
   </script>
