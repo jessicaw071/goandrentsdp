@@ -78,7 +78,7 @@
         </div>
         </ons-toolbar>
 
-		<div class="detailContent" onmouseup="coba(event)">		
+		<div class="detailContent" onmouseup="coba(event)">
 				<div id="myCarousel" class="carousel slide" style="width:100%;height:40%" data-ride="carousel">
 				    <!-- Indicators -->
 					<ol class="carousel-indicators">
@@ -113,7 +113,7 @@
 					</a>
 				</div>
 		</div>
-		
+
       <button id="buyNowBtn"> Buy Now !</button>
          <button id="buyInFutureBtn"> Pay in Future !</button>
          <button id="profileSharingBtn"> Profile Sharing !</button>
@@ -152,7 +152,7 @@
 		<a href='call_host.html' style="font-style:none;color:black;"><h5 style="margin-left:10px;">Contact Host</h5></a>
 		<hr>
 		<h5 style="margin-left:10px;">Reviews</h5>
-		<div id="reviews" style="margin-left:10px;font-family:AgencyFB;height:auto;width:95%;margin-bottom:10px;">			
+		<div id="reviews" style="margin-left:10px;font-family:AgencyFB;height:auto;width:95%;margin-bottom:10px;">
 			<div class="kiri" style="width:20%;height:auto;float:left;margin-right:20px;margin-left:10px;">
 				<div class="fotoUser" style="width:50px;height:50px;position:relative;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;float:left"></div>
 			</div>
@@ -183,13 +183,13 @@
   </ons-page>
   </template>
 </body>
-	
-  <script type="text/javascript">  	
+
+  <script type="text/javascript">
 	function coba(event){
 		var x = event.clientX;
 		document.getElementById("aboutHome").innerHTML = x;
 	}
-	
+
   var app = {
       // Application Constructor
       initialize: function() {
@@ -331,7 +331,7 @@
   function onDeviceReady() {
     app.initPaymentUI();
   }
-  var server = "http://workastation.hol.es/sdpajax/server.php";
+  var server = "http://192.168.1.3/sdpajax/server.php";
   function myfunc(){
     window.plugins.googleplus.login({},function (obj) {
       alert(JSON.stringify(obj)); // do something useful instead of alerting

@@ -35,9 +35,41 @@
 			$longlat = $_POST['lat'].' '.$_POST['long'];
 			$query = "UPDATE rumahs SET longlat_rumah = '".$longlat."' WHERE id_rumah = '".$_POST['id']."'";
 			$link->query($query);
+		}else if($_POST['tipe'] == 'selectProfile') {
+			$query = "SELECT nama_user,picture_user,DATE_FORMAT(created_at, '%M %Y') as since FROM `userproyeks` WHERE id_user='".$_POST['userskr']."'";
+			$res = $link->query($query);
+			$data = $res->fetch_object();
+			echo json_encode($data);
+		}else if($_POST['tipe'] == 'selectEditProfile') {
+			$query = "SELECT email_user,pw_user,nama_user,picture_user,telp_user,alamat_user FROM `userproyeks` WHERE id_user='".$_POST['userskr']."'";
+			$res = $link->query($query);
+			$data = $res->fetch_object();
+			echo json_encode($data);
 		}else if($_POST['tipe'] == 'updateTitleRumah') {
 			$query = "UPDATE rumahs SET title_rumah = '".$_POST['title']."' WHERE id_rumah = '".$_POST['id']."'";
 			$link->query($query);
+		}else if($_POST['tipe'] == 'selectFavorite') {
+			$query = "SELECT r.* FROM rumahs r, favorites f WHERE r.id_rumah = f.id_rumah AND f.id_user = '".$_POST['userskr']."'";
+			$res = $link->query($query);
+			$data = array();
+			while ($row = $res->fetch_object()) {
+				$pecah = explode(" ",$row->longlat_rumah);
+				$row->distance = distance($_POST['longkita'],$_POST['latkita'],$pecah[0],$pecah[1],"K");
+
+				$data[] = $row;
+			}
+			echo json_encode($data);
+		}else if($_POST['tipe'] == 'selectHistory') {
+			$query = "SELECT r.* FROM rumahs r, bookings b WHERE r.id_rumah = b.id_rumah AND b.id_user = '".$_POST['userskr']."'";
+			$res = $link->query($query);
+			$data = array();
+			while ($row = $res->fetch_object()) {
+				$pecah = explode(" ",$row->longlat_rumah);
+				$row->distance = distance($_POST['longkita'],$_POST['latkita'],$pecah[0],$pecah[1],"K");
+
+				$data[] = $row;
+			}
+			echo json_encode($data);
 		}else if($_POST['tipe'] == 'updateHeart') {
 
 			$query = "SELECT * FROM favorites";
@@ -72,6 +104,27 @@
               $data[] = $row;
           	}
 			echo json_encode($data);
+		}else if($_POST['tipe'] == 'updatePP'){
+				$image = $_FILES['gbrProfile'];
+        if($image['name']!=''){
+            $folder = "images/";
+            $pic_loc = $image['tmp_name'];
+            $pic_name = $_POST['userskr'].".jpg";
+            $pic_type = $image['type'];
+            $typebole = array('image/jpg','image/png','image/gif','image/jpeg');
+            $imgData = addslashes (file_get_contents($image['tmp_name']));
+            if(in_array($pic_type,$typebole)){
+                move_uploaded_file($pic_loc,$folder.$pic_name);
+                $qry = "UPDATE userproyeks SET picture_user='".$folder.$pic_name."' WHERE id_user='".$_POST['userskr']."'";
+                if($link->query($qry) === TRUE){
+                    echo "benar";
+                }else{
+                    echo "jangan";
+                }
+            }else{
+                echo "jangan";
+            }
+        }
 		}else if($_POST['tipe'] == 'ambilNearme') {
 			$query = "SELECT * FROM rumahs";
 			$res = $link->query($query);
@@ -100,6 +153,10 @@
 			echo json_encode($data);
 		}else if($_POST['tipe'] == 'mintamd5php') {
 			echo md5($_POST['pass']);
+		}else if($_POST['tipe'] == 'ajaxUpdateProf') {
+			$query = "UPDATE userproyeks SET nama_user='".$_POST['nama']."' , alamat_user='".$_POST['alamat']."' , email_user='".$_POST['email']."' , telp_user='".$_POST['telp']."' WHERE id_user='".$_POST['userskr']."'";
+			$link->query($query);
+			echo "a";
 		}else if($_POST['tipe'] == 'ajaxRegister') {
 			// tipe 2 kirim chat
 			$query = "SELECT * FROM userproyeks";

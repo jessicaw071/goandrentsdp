@@ -77,6 +77,7 @@
           Go & Rent
         </div>
         </ons-toolbar>
+<form id="data" method="post" enctype="multipart/form-data">
 
 		<div class="contProfile" style="width:100%;height:auto;margin-bottom:100px;">
 				<!--<div class="fotoProfile" style="width:100px;height:100px;position:relative;margin:auto;margin-top:20px;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;margin-bottom:10px;"></div>
@@ -88,8 +89,8 @@
           <input id="file-input" name="gbrProfile" style="display:none;" type="file"/>
         </div>
         <p id="changePhoto" align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;color:#f94d6e">Change Photo</p>
-				<!--<input type="file" name="profileUpload" id="UploadPhoto" style="display:none">-->
-				<p align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;">Member since August 2017</p>
+				<!--<input type="file" name="profileUpload" id="UploadPhoto" style="display:none">
+				<p align="center" style="font-family:AgencyFB;font-size:1em;font-weight:none;position:relative;">Member since August 2017</p>-->
 				<p align="left" style="margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;color:gray;">Full name</p>
 				<input type="text" id="txtName" name="fullname" value="Kenji Andrean"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Email</p>
@@ -105,15 +106,18 @@
         <br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Date of Birth</p>
 				<input type="date" id="datepickerDoB" name="dateDoB" min="1980-01-01" value="1997-12-01"><br>
-				--><p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Telephone</p>
+				-->
+        <p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Telephone</p>
 				<input type="text" placeholder="Telephone" name="telp" id="txtTelp"><br>
 				<p align="left" style="margin-top:30px;margin-left:20px;font-family:AgencyFB;font-size:1.5em;font-weight:none;position:relative;color:gray;">Address</p>
 				<input type="text" id="txtAddress" name="address" value="Kenji Andrean" placeholder="Alamat"><br>
 		</div>
 
 		<footer style="text-align:right;padding-right:20px;">
-				<input type="button" name="btnBooking" value="Save" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
+				<input type="button" name="btnBooking" onclick='save();' value="Save" style="width:30%;height:60%;background-color:#f94d6e;border-radius:10px;font-size:1.5em;color:white;top:20%;position:relative;">
 		</footer>
+
+  </form>
   </ons-page>
   </template>
 	</body>
@@ -126,6 +130,40 @@
   var ini ;
   var server = "http://192.168.1.3/sdpajax/server.php";
     document.addEventListener("deviceready", onDeviceReady, false);
+    function save(){
+        var formData = new FormData($('#data')[0]);
+        formData.append('tipe','updatePP');
+        formData.append('userskr',ini);
+        $.ajax({
+            type : "POST",
+            url : server,
+            data : formData,
+            cache : false,
+            contentType: false,
+            processData: false,
+            success : function(data){
+                if(data=="benar"){
+                   alert("Update Berhasil");
+                }else if(data=="jangan"){
+                  alert("Update Gagal! Pastikan Tidak ada Special Character (',\",#,%,etc) atau File Image Benar");
+                }else{
+                  alert(data);
+                }
+
+            }
+        });
+        var getInputPass = document.getElementById('txtPassword').value;
+        var getInputNama = document.getElementById('txtName').value;
+        var getInputEmail = document.getElementById('txtEmail').value;
+        var getInputTelp = document.getElementById('txtTelp').value;
+        var getInputAlamat = document.getElementById('txtAddress').value;
+        $.post(server, {'userskr': ini ,'pass': getInputPass,'alamat': getInputAlamat, 'nama': getInputNama, 'email': getInputEmail, 'telp' : getInputTelp, 'tipe': "ajaxUpdateProf"},function(data){
+          if(data == "a"){
+            alert("Berhasil Update!");
+          }
+          window.location = "next.html";
+        });
+    }
     function onDeviceReady(){
       ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
       $.post(server, {'userskr' : ini ,'tipe': "selectEditProfile"},function(data){
@@ -136,7 +174,8 @@
         $("#txtTelp").val(data.telp_user);
         $("#txtAddress").val(data.alamat_user);
         $("#txtPassword").val(data.pw_user);
-        $(".fotoProfile").css("background-image","url('"+data.picture_user+"')");
+        var isipic = data.picture_user[5] == ":" ? data.picture_user : "http://192.168.1.3/sdpajax/"+data.picture_user;
+        $(".fotoProfile").css("background-image","url('"+isipic+"')");
       });
     };
 
@@ -209,24 +248,24 @@
       }
     }
   }
-  window.fn = {};
-    window.fn.open = function() {
-        let menu = document.getElementById('menu');
-        menu.open();
-    };
 
-    window.fn.close = function() {
-        let menu = document.getElementById('menu');
-        menu.close();
-    };
-    function makeNotification() {
-        cordova.plugins.notification.local.schedule({
-            id: 1,
-            title: "Coba Coba",
-            text: "Hai Hai Timo"
-        });
-    };
-*/
+*/window.fn = {};
+  window.fn.open = function() {
+      let menu = document.getElementById('menu');
+      menu.open();
+  };
+
+  window.fn.close = function() {
+      let menu = document.getElementById('menu');
+      menu.close();
+  };
+  function makeNotification() {
+      cordova.plugins.notification.local.schedule({
+          id: 1,
+          title: "Coba Coba",
+          text: "Hai Hai Timo"
+      });
+  };
   app.initialize();
 
   </script>
