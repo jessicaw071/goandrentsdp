@@ -147,6 +147,10 @@
           alert('code: '    + error.code    + '\n' +
                 'message: ' + error.message + '\n');
       }
+      function pindahDetail(id){
+        localStorage.setItem("detailID",id);
+        window.location = "detail.html";
+      }
     function onDeviceReady(){
       ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
       navigator.geolocation.getCurrentPosition(onSuccess, onError);
@@ -154,7 +158,7 @@
         data = JSON.parse(data);
           $("#isiHistory").html("");
         for(var i= 0;i<data.length;i++){
-          $("#isiHistory").html($("#isiHistory").html()+'<div class="horizontal-menu-fav" style="display:absolute;"><div class="detailFavorite" style="display:inline-block;"><div class="img-feature"><center><img src="'+data[i].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><h5><b>'+data[i].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[i].kapasitas+' Orang &bull; '+(Math.floor(data[i].distance*1000)/1000)+' km</span></div></div></div>');
+          $("#isiHistory").html($("#isiHistory").html()+'<div class="horizontal-menu-fav" onclick="pindahDetail(\''+data[i].id_rumah+'\')" style="display:absolute;"><div class="detailFavorite" style="display:inline-block;"><div class="img-feature"><center><img src="'+data[i].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><h5><b>'+data[i].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[i].kapasitas+' Orang &bull; '+(Math.floor(data[i].distance*1000)/1000)+' km</span></div></div></div>');
         }
       });
     };

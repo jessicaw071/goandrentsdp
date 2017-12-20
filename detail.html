@@ -142,7 +142,7 @@
 		<hr>
 		<div id="aboutHome" style="margin-left:10px;font-family:AgencyFB;height:auto;width:95%;margin-bottom:20px;">
 			<h5>About this House</h5>
-			<p class="isiDetail" style="font-size:1em;font-weight:none;margin-right:10px;">Comfy little home for family holiday. Another facilities are kitchen, air conditioner in every room, refrigerator, and pantry.</p>
+			<p class="isiDetail" style="font-size:1em;font-weight:none;">Comfy little home for family holiday. Another facilities are kitchen, air conditioner in every room, refrigerator, and pantry.</p>
 		</div>
 		<hr>
 		<a href='call_host.html' style="font-style:none;color:black;"><h5 style="margin-left:10px;">Contact Host</h5></a>
@@ -156,7 +156,7 @@
 				<div class="namaUser" style="width:auto;height:auto;position:relative;font-size:1.5em;font-family:AgencyFB;float:none;">Timo Tirtawan</div>
 				<div class="tglReview" style="width:auto;height:auto;position:relative;font-size:1em;font-family:HNLight;float:none;color:lightgray;font-weight:none;">November 2017</div>
 			</div>
-			<div class="isiReview" style="width:auto;height:auto;margin-top:10px;position:relative;font-size:1em;font-family:HNLight;float:none;color:black;font-weight:none;clear:both; margin-right:10px;">WILL do next! If they had at the Caterpillar's making such VERY short remarks, and she walked on in a few minutes she heard her voice close to them, and all the first figure,' said the Mouse. 'Of course,' the Dodo solemnly, rising to its feet, ran round the court and got behind Alice as she came in sight of the e--e--evening, Beautiful, beautiful Soup!' CHAPTER XI. Who Stole the Tarts? The King and Queen of Hearts, she made it out to her daughter 'Ah, my dear! Let this be a book written about.</div>
+			<div class="isiReview" style="width:auto;height:auto;margin-top:10px;position:relative;font-size:1em;font-family:HNLight;float:none;color:black;font-weight:none;clear:both;">WILL do next! If they had at the Caterpillar's making such VERY short remarks, and she walked on in a few minutes she heard her voice close to them, and all the first figure,' said the Mouse. 'Of course,' the Dodo solemnly, rising to its feet, ran round the court and got behind Alice as she came in sight of the e--e--evening, Beautiful, beautiful Soup!' CHAPTER XI. Who Stole the Tarts? The King and Queen of Hearts, she made it out to her daughter 'Ah, my dear! Let this be a book written about.</div>
 			<hr>
 			<div class="kiri" style="width:20%;height:auto;float:left;margin-right:20px;margin-left:10px;">
 				<div class="fotoUser" style="width:50px;height:50px;position:relative;border-radius:50px;background-image:url(img/kenji.jpg);background-size:cover;repeat:no-repeat;float:left"></div>
@@ -165,10 +165,10 @@
 				<div class="namaUser" style="width:auto;height:auto;position:relative;font-size:1.5em;font-family:AgencyFB;float:none;">Timo Tirtawan</div>
 				<div class="tglReview" style="width:auto;height:auto;position:relative;font-size:1em;font-family:HNLight;float:none;color:lightgray;font-weight:none;">November 2017</div>
 			</div>
-			<div class="isiReview" style="width:auto;height:auto;margin-top:10px;position:relative;font-size:1em;font-family:HNLight;float:none;color:black;font-weight:none;clear:both; margin-right:10px;">WILL do next! If they had at the Caterpillar's making such VERY short remarks, and she walked on in a few minutes she heard her voice close to them, and all the first figure,' said the Mouse. 'Of course,' the Dodo solemnly, rising to its feet, ran round the court and got behind Alice as she came in sight of the e--e--evening, Beautiful, beautiful Soup!' CHAPTER XI. Who Stole the Tarts? The King and Queen of Hearts, she made it out to her daughter 'Ah, my dear! Let this be a book written about.</div>
+			<div class="isiReview" style="width:auto;height:auto;margin-top:10px;position:relative;font-size:1em;font-family:HNLight;float:none;color:black;font-weight:none;clear:both;">WILL do next! If they had at the Caterpillar's making such VERY short remarks, and she walked on in a few minutes she heard her voice close to them, and all the first figure,' said the Mouse. 'Of course,' the Dodo solemnly, rising to its feet, ran round the court and got behind Alice as she came in sight of the e--e--evening, Beautiful, beautiful Soup!' CHAPTER XI. Who Stole the Tarts? The King and Queen of Hearts, she made it out to her daughter 'Ah, my dear! Let this be a book written about.</div>
 			<hr>
 		</div>
-		<p style="margin-left:10px;margin-bottom:80px;font-size:1em; margin-right:10px;">Exact location information is provided after a booking is confirmed.</p>
+		<p style="margin-left:10px;margin-bottom:80px;font-size:1em;">Exact location information is provided after a booking is confirmed.</p>
 		<footer>
 			<div class="price" style="text-align:left;margin-top:10px;margin-left:10px;font-size:1.5em;font-weight:bold;float:left">Rp. 10.250.000,00</div><div style="float:left;text-align:left;font-size:1em;margin-top:15px;margin-left:5px;">per night</div>
 			<div class="captReview" style="font-size:1em;margin-left:10px;clear:both;position:absolute;bottom:10px;">Rates 4 of 5</div>
@@ -185,123 +185,48 @@
 		var x = event.clientX;
 		document.getElementById("aboutHome").innerHTML = x;
 	}
+  var server = "http://192.168.1.3/sdpajax/server.php";
+  var ini,ini2;
+  var latkita=0,longkita=0;
+    document.addEventListener("deviceready", onDeviceReady, false);
+    var onSuccess = function(position) {
+          /*alert('Latitude: '          + position.coords.latitude          + '\n' +
+                'Longitude: '         + position.coords.longitude         + '\n' +
+                'Altitude: '          + position.coords.altitude          + '\n' +
+                'Accuracy: '          + position.coords.accuracy          + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                'Heading: '           + position.coords.heading           + '\n' +
+                'Speed: '             + position.coords.speed             + '\n' +
+                'Timestamp: '         + position.timestamp                + '\n');*/
+          latkita = position.coords.latitude;
+          longkita = position.coords.longitude;
+      };
 
-  var app = {
-      // Application Constructor
-      initialize: function() {
-          this.bindEvents();
-      },
-      // Bind Event Listeners
+      // onError Callback receives a PositionError object
       //
-      // Bind any events that are required on startup. Common events are:
-      // 'load', 'deviceready', 'offline', and 'online'.
-      bindEvents: function() {
-          document.addEventListener('deviceready', this.onDeviceReady, false);
-      },
-      // deviceready Event Handler
-      //
-      // The scope of 'this' is the event. In order to call the 'receivedEvent'
-      // function, we must explicity call 'app.receivedEvent(...);'
-      onDeviceReady: function() {
-          app.receivedEvent('deviceready');
-      },
-      // Update DOM on a Received Event
-      receivedEvent: function(id) {
-          var parentElement = document.getElementById(id);
-          var listeningElement = parentElement.querySelector('.listening');
-          var receivedElement = parentElement.querySelector('.received');
-
-          listeningElement.setAttribute('style', 'display:none;');
-          receivedElement.setAttribute('style', 'display:block;');
-
-          console.log('Received Event: ' + id);
-
-          // start to initialize PayPalMobile library
-          app.initPaymentUI();
-      },
-      initPaymentUI : function () {
-        var clientIDs = {
-          "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
-          "PayPalEnvironmentSandbox": "YOUR_SANDBOX_CLIENT_ID"
-        };
-        PayPalMobile.init(clientIDs, app.onPayPalMobileInit);
-
-      },
-      onSuccesfulPayment : function(payment) {
-        console.log("payment success: " + JSON.stringify(payment, null, 4));
-      },
-      // This code is only used for independent card.io scanning abilities
-      onCardIOComplete: function(card) {
-        console.log("Card Scanned success: " + JSON.stringify(card, null, 4));
-      },
-      onAuthorizationCallback : function(authorization) {
-        console.log("authorization: " + JSON.stringify(authorization, null, 4));
-      },
-      createPayment : function () {
-        // for simplicity use predefined amount
-        // optional payment details for more information check [helper js file](https://github.com/paypal/PayPal-Cordova-Plugin/blob/master/www/paypal-mobile-js-helper.js)
-        var paymentDetails = new PayPalPaymentDetails("50.00", "0.00", "0.00");
-        var payment = new PayPalPayment("50.00", "USD", "Awesome Sauce", "Sale", paymentDetails);
-        return payment;
-      },
-      configuration : function () {
-        // for more options see `paypal-mobile-js-helper.js`
-        var config = new PayPalConfiguration({merchantName: "My test shop", merchantPrivacyPolicyURL: "https://mytestshop.com/policy", merchantUserAgreementURL: "https://mytestshop.com/agreement"});
-        return config;
-      },
-      onPrepareRender : function() {
-        // buttons defined in index.html
-        //  <button id="buyNowBtn"> Buy Now !</button>
-        //  <button id="buyInFutureBtn"> Pay in Future !</button>
-        //  <button id="profileSharingBtn"> ProfileSharing !</button>
-        //  <button id="cardScanBtn">Advanced: Use card.io scan only</button>
-        var buyNowBtn = document.getElementById("buyNowBtn");
-        var buyInFutureBtn = document.getElementById("buyInFutureBtn");
-        var profileSharingBtn = document.getElementById("profileSharingBtn");
-        var cardScanBtn = document.getElementById("cardScanBtn");
-
-        buyNowBtn.onclick = function(e) {
-          // single payment
-          PayPalMobile.renderSinglePaymentUI(app.createPayment(), app.onSuccesfulPayment, app.onUserCanceled);
-          alert("test");
-        };
-
-        buyInFutureBtn.onclick = function(e) {
-          // future payment
-          PayPalMobile.renderFuturePaymentUI(app.onAuthorizationCallback, app.onUserCanceled);
-        };
-
-        profileSharingBtn.onclick = function(e) {
-          // profile sharing
-          PayPalMobile.renderProfileSharingUI(["profile", "email", "phone", "address", "futurepayments", "paypalattributes"], app.onAuthorizationCallback, app.onUserCanceled);
-        };
-
-        cardScanBtn.onclick = function(e) {
-          // card.io scanning independent of paypal payments.
-          // This is used for cases where you only need to scan credit cards and not use PayPal as funding option.
-          CardIO.scan({
-                       "requireExpiry": true,
-                       "requireCVV": false,
-                       "requirePostalCode": false,
-                       "restrictPostalCodeToNumericOnly": true
-                     },
-                     app.onCardIOComplete,
-                     app.onUserCanceled
-                   );
-         };
-      },
-      onPayPalMobileInit : function() {
-        // must be called
-        // use PayPalEnvironmentNoNetwork mode to get look and feel of the flow
-        PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", app.configuration(), app.onPrepareRender);
-      },
-      onUserCanceled : function(result) {
-        console.log(result);
+      function onError(error) {
+          alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
       }
-  };
-
-  app.initialize();
-    window.fn = {};
+    function onDeviceReady(){
+      ini = localStorage.getItem("storageName") != null ? localStorage.getItem("storageName") : "tm_tr" ;
+      ini2 = localStorage.getItem("tipeName");
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+      $.post(server, {'userskr' : ini ,'longkita' : longkita , 'latkita': latkita,'tipe': ini2},function(data){
+        data = JSON.parse(data);
+        if(ini2 == "ambilNearme"){
+          data.sort(function(a,b){
+            return a.distance - b.distance;
+          });
+        }
+          $("#isiSeemore").html("");
+        for(var i= 0;i<data.length;i++){
+          $("#isiSeemore").html($("#isiSeemore").html()+'<div class="horizontal-menu-fav" style="display:absolute;"><div class="detailFavorite" style="display:inline-block;"><div class="img-feature"><center><img src="'+data[i].picture_rumah+'" style="width:100%;height:100%;"></center></div><div class="content"><h5><b>'+data[i].title_rumah+'</b></h5><span style="font-size: 0.8em">'+data[i].kapasitas+' Orang &bull; '+(Math.floor(data[i].distance*1000)/1000)+' km</span></div></div></div>');
+        }
+      });
+    };
+    $(document).ready(onDeviceReady);
+  window.fn = {};
     window.fn.open = function() {
         let menu = document.getElementById('menu');
         menu.open();
@@ -319,84 +244,7 @@
         });
     };
 
-  /*
-
-  function onLoad() {
-      document.addEventListener("deviceready", onDeviceReady, false);
-  }
-  function onDeviceReady() {
-    app.initPaymentUI();
-  }
-  var server = "http://192.168.1.3/sdpajax/server.php";
-  function myfunc(){
-    window.plugins.googleplus.login({},function (obj) {
-      alert(JSON.stringify(obj)); // do something useful instead of alerting
-    },
-    function (msg) {
-      alert('error: ' + msg);
-    });
-  };
-  function myfuncfb(){
-    var fbLoginSuccess = function(result){
-    //calling api after login success
-    facebookConnectPlugin.api("/me?fields=email,name,birthday",['email','user_birthday','public_profile'],function(userData){
-    //API success callback
-      alert("User Info : "+userData.email+"\n Hello ! Our Beloved : "+userData.name +"\n We Want to Remind You that your Birthday is : "+userData.birthday);
-      },function(error){
-    //API error callback
-      alert(JSON.stringify(error));
-      });
-    }
-    //alert("user Info : "+userData.name+" Hello "+userData.email);
-    //document.getElementById("cobaAjax").innerHTML=JSON.stringify(userData);
-    //alert("UserInfo: "+userData['email'] + "\n Hello "+userData['name']+" Good to see you");
-    //};
-    facebookConnectPlugin.login(['email','user_birthday','public_profile'], fbLoginSuccess,
-    function loginError (error) {
-    alert(JSON.stringify(error));
-  });
-  };
-  function onBackKeyDown(){
-    makeNotification();
-    $.post(server, {'chat': chat, 'nama': nama, 'tipe': 2});
-
-    var x = confirm("Are you sure ?");
-    window.plugins.googleplus.disconnect(
-      function (msg) {
-        alert("Berhasil Logout Google"); // do something useful instead of alerting
-      },function (msg) {
-        alert("Gagal Logout Google"); // do something useful instead of alerting
-        x=false;
-        alert(msg);
-
-      }
-    );
-    facebookConnectPlugin.api("/me/permissions?method=delete", ['email','user_birthday','public_profile'],function (msg) {
-      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-    }, function (msg) {
-      alert("Gagal Logout Facebook"); // do something useful instead of alerting
-      x=false;
-      alert(msg);
-    });
-    facebookConnectPlugin.logout(function (msg) {
-      alert("Berhasil Logout  Facebook"); // do something useful instead of alerting
-    }, function (msg) {
-      alert("Gagal Logout Facebook"); // do something useful instead of alerting
-      x=false;
-      alert(msg);
-    });
-
-    if(x){
-      if (navigator.app) {
-          navigator.app.exitApp();
-      } else if (navigator.device) {
-          navigator.device.exitApp();
-      } else {
-          window.close();
-      }
-    }
-  }
-  */
+  app.initialize();
   </script>
 
   <script type="text/javascript" src="js/paypal-mobile-js-helper.js"></script>
