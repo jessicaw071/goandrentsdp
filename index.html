@@ -123,8 +123,8 @@
       data = JSON.parse(data);
       var ketemu = false;
       for(var i = 0; i < data.length; i++){
-        if(data[i].email_renter == getusername || data[i].id_renter == getusername){
-          if(data[i].pw_renter == getpassword){
+        if(data[i].email_user == getusername || data[i].id_user == getusername){
+          if(data[i].pw_user == getpassword){
             localStorage.setItem("storageName",getusername);
             alert("Berhasil Login");
             window.location = "next.html";

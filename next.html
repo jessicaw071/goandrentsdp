@@ -239,6 +239,7 @@
     }
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady(){
+
       var ini = localStorage.getItem("storageName");
       //alert(ini);
       navigator.geolocation.getCurrentPosition(onSuccess, onError);
@@ -271,7 +272,16 @@
     }
     $(document).ready(onDeviceReady);
     /*
+    $.post(server, {'tipe': "ambilSemuaRumah"},function(data){
+      data = JSON.parse(data);
+      for(var i = 0 ; i < data.length; i++){
+        var isi = Math.floor(Math.random()*3);
+        var title = isi == 0 ? "Rumah dekat mall" : isi == 1 ? "Rumah dekat pantai" : "Rumah dekat wisata";
+        $.post(server, {'id': data[i].id_rumah ,'tipe': "updateTitleRumah",'title' : title},function(data){
 
+        });
+      }
+    });
     $.post(server, {'tipe': "ambilSemuaRumah"},function(data){
       data = JSON.parse(data);
       for(var i = 0 ; i < data.length; i++){
